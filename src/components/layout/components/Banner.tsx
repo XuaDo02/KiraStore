@@ -27,7 +27,7 @@ const Slideshow: React.FC = () => {
           </div>
           <div className="col-span-1 grid grid-cols-2 gap-4">
             <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage4.jpg" className="w-48 h-48 rounded-full" />
+              <img src="/imgMain/homePage4.jpg" className="max-w-full h-48" />
             </div>
             <div className="flex justify-center items-center">
               <img src="/imgMain/homePage2.jpg" className="max-w-full h-48" />
@@ -36,7 +36,7 @@ const Slideshow: React.FC = () => {
               <img src="/imgMain/homePage3.jpg" className="max-w-full h-48 mt-7" />
             </div>
             <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage4.jpg" className="w-48 h-48 rounded-full" />
+              <img src="/imgMain/homePage4.jpg" className="max-w-full h-48 mt-7" />
             </div>
           </div>
         </div>
