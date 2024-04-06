@@ -3,7 +3,6 @@ import BlogPage from "./components/BlogPage"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import HomePage from "./components/HomePage"
-import SearchTrendy from "./components/SearchTrendy"
 
 function MainLayout () {
     return (
@@ -11,7 +10,6 @@ function MainLayout () {
             <div>
                 <Header/>
                 <Banner/>
-                <SearchTrendy/>
                 <div className="">
                     <HomePage/>
                     <BlogPage/>

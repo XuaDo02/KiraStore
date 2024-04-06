@@ -1,6 +1,7 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
+import SearchTrendy from './SearchTrendy';
 
 const images: string[] = [
   'imgBanner/banner5.jpg',
@@ -18,7 +19,9 @@ const Slideshow: React.FC = () => {
           ))}
         </Zoom>
       </div>
-
+      <div className='mt-5'>
+      <SearchTrendy/>
+      </div>
       {/* grid xếp */}
       <div className="py-8 px-5 bg-customOrange">
         <div className="grid grid-cols-2 items-center">
