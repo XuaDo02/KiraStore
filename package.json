@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "iconsax-react": "^0.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.4",
     "react-multi-carousel": "^2.8.5",
-    "react-slideshow-image": "^4.3.1"
+    "react-router-dom": "^6.22.3",
+    "react-slideshow-image": "^4.3.1",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

@@ -1,8 +1,8 @@
-import Banner from "./components/Banner"
-import BlogPage from "./components/BlogPage"
-import Footer from "./components/Footer"
-import Header from "./components/Header"
-import HomePage from "./components/HomePage"
+import Banner from "./componentsLayout/Banner"
+import BlogPage from "./componentsLayout/BlogPage"
+import Footer from "./componentsLayout/Footer"
+import Header from "./componentsLayout/Header"
+import HomePage from "./componentsLayout/HomePage"
 
 function MainLayout () {
     return (
