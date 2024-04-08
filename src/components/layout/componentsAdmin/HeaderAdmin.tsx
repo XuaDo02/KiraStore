@@ -3,21 +3,22 @@ import Marquee from "react-fast-marquee";
 export default function Header() {
   return (
     <div className="text-white bg-customDark2 h-14 grid grid-cols-6">
-      {/* Phần 1: Ảnh KB */}
+      {/* Phần 1: Ảnh KS */}
       <div className="flex items-center justify-start pl-5">    
-        <img src="/imgHeaderAd/KB.png" className="mr-2" />
+        <img src="/imgHeaderAd/KR.png" className="mr-2 w-16 h-16" />
+        <h1 className="text-2xl font-sans">KiraStore</h1>
       </div>
 
       {/* Phần 2: "Tin mới" */}
       <div className="col-span-2 flex items-center justify-start relative">
-        <button className="relative z-10 w-32 h-5 text-sm text-customYellow bg-gradient-to-r from-customGrayDark to-customDark2 rounded-lg hover:from-transparent hover:to-gray-400">
-          Tin mới
+        <button className="relative z-10 w-20 h-5 text-sm text-customYellow bg-gradient-to-r from-customGrayDark to-customDark2 rounded-lg hover:from-transparent hover:to-gray-400">
+          KS
           <div className="absolute top-0 right-0 transform translate-x-1/6 -translate-y-1/6 bg-customRed rounded-full w-2 h-2"></div>
         </button>
 
         <div>
           <Marquee>
-            I can be a React component, multiple React components
+            Chào quản trị viên Kira Store
           </Marquee>
         </div>
       </div>
