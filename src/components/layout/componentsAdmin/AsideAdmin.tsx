@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft2 } from "iconsax-react";
 import { useOnClickOutside } from "usehooks-ts";
 
 export default function Aside() {
@@ -19,68 +18,72 @@ export default function Aside() {
 
   const asideItems = [
     {
-      imgSrc: "/images/imgAside/presention-chart.png",
-      text: "Bảng giá"
+      imgSrc: "/imgAsideAd/people.png",
+      text: "Quản lý danh mục sản phẩm"
     },
     {
-      imgSrc: "/images/imgAside/category-2.png",
-      text: "Giao diện của tôi"
+      imgSrc: "/imgAsideAd/product.png",
+      text: "Quản lý sản phẩm"
     },
     {
-      imgSrc: "/images/imgAside/Stock_trading.png",
-      text: "Giao dịch",
+      imgSrc: "/imgAsideAd/shop.png",
+      text: "Quản lý người dùng",
       isDropdown: true,
       dropDownLinks: [
         {
-          imgSrc: "/images/imageMenu/trade.png",
+          imgSrc: "/imageMenu/trade.png",
           text: "Đặt lệnh",
           to: "/datlenh"
         },
         {
-          imgSrc: "/images/imageMenu/note-2.png",
+          imgSrc: "/imageMenu/note-2.png",
           text: "Sổ lệnh",
           to: "/solenh"
         },
         {
-          imgSrc: "/images/imageMenu/chart-success.png",
+          imgSrc: "/imageMenu/chart-success.png",
           text: "Xác nhận lệnh",
           to: "/xacnhanlenh"
         },
         {
-          imgSrc: "/images/imageMenu/message-edit.png",
+          imgSrc: "/imageMenu/message-edit.png",
           text: "Đăng ký quyền mua",
           to: "/registerBuyTab",
           className: "bg-yellow-500"
         },
         {
-          imgSrc: "/images/imageMenu/forward-item.png",
+          imgSrc: "/imageMenu/forward-item.png",
           text: "Trái phiếu chuyển đổi",
           to: "/traiphieuchuyendoi"
         },
         {
-          imgSrc: "/images/imageMenu/recovery-convert.png",
+          imgSrc: "/imageMenu/recovery-convert.png",
           text: "Chuyển khoản chứng khoán",
           to: "/chuyenkhoanchungkhoan"
         }
       ]
     },
     {
-      imgSrc: "/images/imgAside/Money_trading.png",
-      text: "Giao dịch tiền"
+      imgSrc: "/imgAsideAd/box.png",
+      text: "Quản lý đơn hàng"
     },
     {
-      imgSrc: "/images/imgAside/Frame 427319649.png",
-      text: "Quản lý tài khoản"
+      imgSrc: "/imgAsideAd/chat.png",
+      text: "Thống kê và báo cáo"
     },
     {
-      imgSrc: "/images/imgAside/Market_statistics.png",
-      text: "Công cụ phân tích"
+      imgSrc: "/imgAsideAd/note.png",
+      text: "Quản lý bài viết"
+    },
+    {
+      imgSrc: "/imgAsideAd/user.png",
+      text: "Quản lý thông tin khách hàng"
     },
   ];
 
   return (
     <>
-      <aside className="w-20 h-full text-gray-300 bg-customDark2 text-sm ">
+      <aside className="w-24 h-full text-gray-300 bg-customDark2 text-sm ">
         <ul className="py-2" ref={refDialogTrading}>
           {asideItems.map((item, index) => (
             <li
@@ -107,9 +110,6 @@ export default function Aside() {
               )}
             </li>
           ))}
-          <button className="bg-customBlack w-4 h-8 mt-4 rounded-r-md">
-            <ArrowLeft2 size="14" color="#d8d8d8" variant="Bold" />
-          </button>
         </ul>
       </aside>
     </>
