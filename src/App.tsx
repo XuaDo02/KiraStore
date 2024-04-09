@@ -1,14 +1,24 @@
-
-import MainAdmin from './components/layout/MainAdmin'
-import MainLayout from './components/layout/MainLayout'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { routes } from "./router/router.routes"
+import MainAdmin from "./components/layout/MainAdmin"
 
 function App() {
   return (
     <>
-    <MainAdmin/>
-      {/* <MainLayout/> */}
+      <BrowserRouter>
+        <Routes>
+          {
+            routes.map((route) => (
+              <Route
+                path={route.path}
+                element={<MainAdmin>{route.element}</MainAdmin>}
+              />
+            ))
+          }
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

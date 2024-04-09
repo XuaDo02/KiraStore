@@ -33,7 +33,7 @@ export default function Aside() {
             <div className="absolute right-0 left-24 bg-customBlack rounded-md py-1 w-60 z-50">
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                 <li>
-                  <a className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý nhân viên</a>
+                  <a href="/userManagementTab" className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý nhân viên</a>
                 </li>
                 <li>
                   <a className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý thông tin khách hàng</a>

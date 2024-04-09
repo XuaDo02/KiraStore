@@ -1,11 +1,12 @@
 import { useState } from "react"
+import EmployeeManagement from "../EmployeeManagement";
 
 export function UserManagementTab() {
     const [activeTabIndex, setActiveIndex] = useState(0);
     const tabsData = [
         {
             label: "Quản lý nhân viên",
-            content: "djsdksdj"
+            content: <EmployeeManagement/>
         },
         {
             label: "Quản lý thông tin khách hàng",
