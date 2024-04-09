@@ -2,7 +2,7 @@ export interface EmployeeData {
     id: number;
     UserName: string;
     DateOfBirth: string;
-    Gender: boolean;
+    Gender: string;
     Email: string;
     Phone: number;
     Address: string;
