@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EmployeeData } from "../../../../../types/employeedata";
+import { toast } from "react-toastify";
 
 interface Props {
   employee: EmployeeData | null;
@@ -19,6 +20,7 @@ const DialogEditEmployee: React.FC<Props> = ({ employee, onClose, onUpdateEmploy
   const handleSubmit = () => {
     if (!editedEmployee) return;
     onUpdateEmployee(editedEmployee); // Gọi hàm cập nhật thông tin nhân viên
+    toast.success("Cập nhật thông tin nhân viên thành công!")
     onClose(); // Đóng dialog sau khi đã cập nhật xong
   };
 
@@ -33,37 +35,37 @@ const DialogEditEmployee: React.FC<Props> = ({ employee, onClose, onUpdateEmploy
         </div>
 
         <div className="mt-5">
-          <div className="mb-2 flex items-center text-zinc-400">
-            <label className="block text-sm font-medium w-1/2 text-left px-5">Mã nhân viên</label>
-            <input type="text" name="id" value={editedEmployee?.id || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} readOnly />
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
+            <label className="block  font-medium w-1/2 text-left px-5">Mã nhân viên</label>
+            <input type="text" name="id" value={editedEmployee?.id || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} readOnly />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Họ và tên</label>
-            <input type="text" name="UserName" value={editedEmployee?.UserName || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="UserName" value={editedEmployee?.UserName || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Ngày sinh</label>
-            <input type="text" name="DateOfBirth" value={editedEmployee?.DateOfBirth || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="DateOfBirth" value={editedEmployee?.DateOfBirth || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Giới tính</label>
-            <input type="text" name="Gender" value={editedEmployee?.Gender || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="Gender" value={editedEmployee?.Gender || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Email</label>
-            <input type="text" name="Email" value={editedEmployee?.Email || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="Email" value={editedEmployee?.Email || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Số điện thoại</label>
-            <input type="text" name="Phone" value={editedEmployee?.Phone || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="Phone" value={editedEmployee?.Phone || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Địa chỉ</label>
-            <input type="text" name="Address" value={editedEmployee?.Address || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="Address" value={editedEmployee?.Address || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
-          <div className="mb-2 flex items-center text-zinc-400">
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Chức vụ</label>
-            <input type="text" name="Position" value={editedEmployee?.Position || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5" onChange={handleInputChange} />
+            <input type="text" name="Position" value={editedEmployee?.Position || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
         </div>
 

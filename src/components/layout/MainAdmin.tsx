@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 import AsideAdmin from "./componentsAdmin/AsideAdmin"
 import HeaderAdmin from "./componentsAdmin/HeaderAdmin"
 function MainAdmin({ children }: { children: any }): JSX.Element {
@@ -20,6 +22,14 @@ function MainAdmin({ children }: { children: any }): JSX.Element {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                rtl={false}
+                theme="light"
+            />
         </>
     )
 }
