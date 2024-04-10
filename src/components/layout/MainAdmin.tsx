@@ -24,10 +24,14 @@ function MainAdmin({ children }: { children: any }): JSX.Element {
             </div>
             <ToastContainer
                 position="top-center"
-                autoClose={1000}
-                hideProgressBar={true}
+                autoClose={2000}
+                hideProgressBar={false}
                 newestOnTop={false}
+                closeOnClick
                 rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
                 theme="light"
             />
         </>

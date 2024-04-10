@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { EmployeeData } from "../../../../../types/employeedata";
+import { EmployeeData } from "../../../../../../types/employeedata";
+import { toast } from "react-toastify";
 
 const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => void; onUpdateEmployeeList: (newEmployee: EmployeeData) => void }) => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => v
         formData
       );
       onUpdateEmployeeList(response.data); // Cập nhật danh sách nhân viên trong EmployeeManagement
+      toast.success("Thêm nhân viên thành công!")
       onClose(); // Đóng DialogAddEmployee sau khi thêm nhân viên thành công
     } catch (error) {
       console.error("Error adding employee:", error);

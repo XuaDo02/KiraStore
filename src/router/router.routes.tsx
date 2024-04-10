@@ -1,7 +1,8 @@
 import { Home } from "iconsax-react";
 import { IRoute } from "../interfaces/route";
-import { PATH_BASE, PATH_USER_MANAGEMENT_TAB } from "./router.paths";
+import { PATH_BASE, PATH_CATEGORY_MANAGEMENT, PATH_USER_MANAGEMENT_TAB } from "./router.paths";
 import UserManagementTab from "../components/layout/componentsAdmin/UserManagement/UserManagementTab";
+import CategoryManagement from "../components/layout/componentsAdmin/CategoryManagement";
 
 export const routes: IRoute[] = [
     {
@@ -11,5 +12,9 @@ export const routes: IRoute[] = [
     {
         path: PATH_USER_MANAGEMENT_TAB,
         element: <UserManagementTab/>
+    },
+    {
+        path: PATH_CATEGORY_MANAGEMENT,
+        element: <CategoryManagement/>
     }
 ]

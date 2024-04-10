@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EmployeeData } from "../../../../../types/employeedata";
+import { EmployeeData } from "../../../../../../types/employeedata";
 import { toast } from "react-toastify";
 
 interface Props {
