@@ -19,7 +19,7 @@ export default function Aside() {
         <li className="px-1 py-1 flex flex-col items-center">
           <a href="/categoryManagement">
             <img src="/imgAsideAd/shop.png" className="mb-2 pl-7" alt="Shop" />
-            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black pl-1">
               Quản lý danh mục sản phẩm
             </span>
           </a>
@@ -60,9 +60,9 @@ export default function Aside() {
         </li>
         <li className="px-1 py-1 flex flex-col items-center">
           <img src="/imgAsideAd/user.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Quản lý thông tin khách hàng</span>
+          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Thông tin nhà cung cấp</span>
         </li>
       </ul>
     </aside>
-  );
+  );  
 }
