@@ -17,18 +17,20 @@ export default function Aside() {
     <aside className="w-24 h-full text-gray-300 bg-customDark2 text-sm">
       <ul className="py-2" ref={refDialog}>
         <li className="px-1 py-1 flex flex-col items-center">
-          <a href="/categoryManagement">
+          <a href="/categoryManagement" className="text-center">
             <img src="/imgAsideAd/shop.png" className="mb-2 pl-7" alt="Shop" />
-            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black pl-1">
+            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black ">
               Quản lý danh mục sản phẩm
             </span>
           </a>
         </li>
         <li className="px-1 py-1 flex flex-col items-center" >
-          <img src="/imgAsideAd/product.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
-            Quản lý sản phẩm
-          </span>
+          <a href="/productManagement" className="text-center">
+            <img src="/imgAsideAd/product.png" className="mb-2 pl-7" />
+            <span className="text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+              Quản lý sản phẩm
+            </span>
+          </a>
         </li>
         <li className="px-1 py-1 flex flex-col items-center" >
           <button onClick={toggleDropdown}>
@@ -56,16 +58,10 @@ export default function Aside() {
             Quản lý đơn hàng
           </span>
         </li>
-        {/* <li className="px-1 py-1 flex flex-col items-center">
-          <img src="/imgAsideAd/note.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
-            Quản lý bài viết
-          </span>
-        </li> */}
         <li className="px-1 py-1 flex flex-col items-center">
-          <a href="/supplierManagement">
+          <a href="/supplierManagement" className="text-center">
             <img src="/imgAsideAd/shop.png" className="mb-2 pl-7" alt="Shop" />
-            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black pl-1">
+            <span className=" text-xs text-customGrayDark hover:bg-customYellow hover:text-black pl-1">
               Thông tin nhà cung cấp
             </span>
           </a>
@@ -78,5 +74,5 @@ export default function Aside() {
         </li>
       </ul>
     </aside>
-  );  
+  );
 }

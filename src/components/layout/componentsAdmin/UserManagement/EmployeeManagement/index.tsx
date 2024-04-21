@@ -41,7 +41,7 @@ const EmployeeManagement = () => {
   };
 
   // HÀM XOÁ + XOÁ API
-  const handleDeleteClick = (employee : EmployeeData) => {
+  const handleDeleteClick = (employee: EmployeeData) => {
     setDeleteEmployee(employee);
     setShowDeleteDialog(true);
   }
@@ -78,6 +78,17 @@ const EmployeeManagement = () => {
   return (
     <>
       <div className="relative h-35px">
+        <div className="h-16 pb-5 pt-4 pr-8 flex justify-end">
+          <button
+            className="w-36 h-8 text-sm bg-customYellow rounded-md text-black font-semibold"
+            onClick={handleAddClick}
+          >
+            Thêm mới nhân viên
+          </button>
+        </div>
+        <div className="">
+          <hr className="border-t border-neutral-600 w-full" />
+        </div>
         <div className="grid grid-cols-12 text-customGrayLight text-center items-center w-full text-xs py-3">
           <div className="grid col-span-5 grid-cols-7">
             <div className="col-span-2">Mã nhân viên</div>
@@ -119,30 +130,17 @@ const EmployeeManagement = () => {
                 </button>
                 {/* Delete button */}
                 <button className="col-span-1 flex items-center justify-center" onClick={() => handleDeleteClick(employee)}>
-                  <img src="/imgEmployee/delete.png" className="w-5 h-5 mr-1" alt="Delete" /> Xoá 
+                  <img src="/imgEmployee/delete.png" className="w-5 h-5 mr-1" alt="Delete" /> Xoá
                 </button>
               </div>
             </div>
           ))}
         </div>
         {showEditDialog && <DialogEditEmployee employee={selectedEmployee} onClose={() => setShowEditDialog(false)} onUpdateEmployee={handleUpdateEmployee} />}
-        {showAddDialog && <DialogAddEmployee onClose={() => setShowAddDialog(false)} onUpdateEmployeeList={handleAddEmployee}/>}
+        {showAddDialog && <DialogAddEmployee onClose={() => setShowAddDialog(false)} onUpdateEmployeeList={handleAddEmployee} />}
         {showDeleteDialog && <DialogDeleteEmployee handleClose={() => setShowDeleteDialog(false)} onDeleteEmployee={handleDeleteEmployee} employee={deleteEmloyee} />}
       </div>
-      <div className="h-10 mx-3 py-7">
-        <div className="flex justify-between">
-          <div className="flex flex-item">
-            <div>
-              <button 
-              className="w-36 h-8 text-sm bg-customYellow rounded-md text-black font-semibold"
-              onClick={handleAddClick}
-              >
-                Thêm mới nhân viên
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </>
   );
 };

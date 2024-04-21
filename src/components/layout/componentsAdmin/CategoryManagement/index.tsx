@@ -22,7 +22,7 @@ export default function CategoryManagement() {
         fetchData();
     }, []);
 
-    // HÀM THÊM VÀ UPDATE_LIST START
+    // HÀM ADD VÀ UPDATE_LIST START
     const [showAddDialog, setShowAddDialog] = useState(false);
     const handleAddClick = () => {
         setShowAddDialog(true);
@@ -31,7 +31,7 @@ export default function CategoryManagement() {
         setCategories([...categories, newCategory]);
         setShowAddDialog(false);
     }
-    // HÀM THÊM VÀ UPDATE_LIST END
+    // HÀM ADD VÀ UPDATE_LIST END
 
     // HÀM XOÁ VÀ UPDATE_LIST START
     const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
@@ -59,7 +59,7 @@ export default function CategoryManagement() {
                 <div className="text-base text-customWhite border-customYellow bg-gradient-to-t from-customGrayDark to-customDark2">
                     <h1 className="py-4 pl-5">Quản lý danh mục sản phẩm</h1>
                 </div>
-                <div className="h-16 pb-5 pt-4 pl-5">
+                <div className="h-16 pb-5 pt-4 pr-16 flex justify-end">
                     <button
                         onClick={handleAddClick}
                         className="w-44 h-8 text-sm bg-customYellow rounded-md text-black font-semibold"
