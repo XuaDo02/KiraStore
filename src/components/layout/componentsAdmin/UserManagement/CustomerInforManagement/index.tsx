@@ -27,7 +27,7 @@ export default function CustomerInforManagement() {
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
                 </div>
-                <div className="grid grid-cols-7 text-customGrayLight text-center items-center w-full text-xs py-3">
+                <div className="grid grid-cols-5 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
                         <div>Mã nhà khách hàng</div>
                     </div>
@@ -48,7 +48,7 @@ export default function CustomerInforManagement() {
                     {customers.map((customer, index) => (
                         <div
                             key={customer.customerId}
-                            className={`grid grid-cols-7 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
+                            className={`grid grid-cols-5 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
                                 <div>{customer.customerId}</div>
