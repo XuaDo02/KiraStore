@@ -46,7 +46,7 @@ export default function Aside() {
                   <a href="/userManagementTab" className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý nhân viên</a>
                 </li>
                 <li>
-                  <a className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý thông tin khách hàng</a>
+                  <a href="/userManagementTab" className="px-2 py-2 text-sm text-customGrayLight flex ml-2 hover:bg-customYellow hover:text-black ">Quản lý thông tin khách hàng</a>
                 </li>
               </ul>
             </div>

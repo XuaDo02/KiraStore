@@ -1,5 +1,6 @@
 import { useState } from "react"
 import EmployeeManagement from "../EmployeeManagement";
+import CustomerInforManagement from "../CustomerInforManagement";
 
 export function UserManagementTab() {
     const [activeTabIndex, setActiveIndex] = useState(0);
@@ -10,7 +11,7 @@ export function UserManagementTab() {
         },
         {
             label: "Quản lý thông tin khách hàng",
-            content: "djsdksdj"
+            content: <CustomerInforManagement/>
         }
     ];
     return (
