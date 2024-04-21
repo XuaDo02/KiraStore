@@ -26,12 +26,16 @@ export default function Aside() {
         </li>
         <li className="px-1 py-1 flex flex-col items-center" >
           <img src="/imgAsideAd/product.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Quản lý sản phẩm</span>
+          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+            Quản lý sản phẩm
+          </span>
         </li>
         <li className="px-1 py-1 flex flex-col items-center" >
           <button onClick={toggleDropdown}>
             <img src="/imgAsideAd/people.png" className="mb-2 pl-7" />
-            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Quản lý người dùng</span>
+            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+              Quản lý người dùng
+            </span>
           </button>
           {showDropdown && (
             <div className="absolute right-0 left-24 bg-customBlack rounded-md py-1 w-60 z-50">
@@ -48,19 +52,29 @@ export default function Aside() {
         </li>
         <li className="px-1 py-1 flex flex-col items-center">
           <img src="/imgAsideAd/box.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Quản lý đơn hàng</span>
+          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+            Quản lý đơn hàng
+          </span>
+        </li>
+        {/* <li className="px-1 py-1 flex flex-col items-center">
+          <img src="/imgAsideAd/note.png" className="mb-2" />
+          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+            Quản lý bài viết
+          </span>
+        </li> */}
+        <li className="px-1 py-1 flex flex-col items-center">
+          <a href="/supplierManagement">
+            <img src="/imgAsideAd/shop.png" className="mb-2 pl-7" alt="Shop" />
+            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black pl-1">
+              Thông tin nhà cung cấp
+            </span>
+          </a>
         </li>
         <li className="px-1 py-1 flex flex-col items-center">
           <img src="/imgAsideAd/chat.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Thống kê và báo cáo</span>
-        </li>
-        <li className="px-1 py-1 flex flex-col items-center">
-          <img src="/imgAsideAd/note.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Quản lý bài viết</span>
-        </li>
-        <li className="px-1 py-1 flex flex-col items-center">
-          <img src="/imgAsideAd/user.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">Thông tin nhà cung cấp</span>
+          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+            Thống kê và báo cáo
+          </span>
         </li>
       </ul>
     </aside>

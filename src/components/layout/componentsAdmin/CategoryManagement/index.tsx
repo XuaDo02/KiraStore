@@ -15,7 +15,7 @@ export default function CategoryManagement() {
                 );
                 setCategories(response.data);
             } catch (error) {
-                console.error("Error fetching employee data:", error);
+                console.error("Error fetching categories data:", error);
             }
         };
 
