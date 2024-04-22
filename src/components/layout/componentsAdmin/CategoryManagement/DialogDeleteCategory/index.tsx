@@ -27,7 +27,7 @@ const DialogDeleteCategory: React.FC<DialogDeleteCategoryProps> = ({ handleClose
                     </div>
                     <div className="my-16">
                         <div className=" flex items-center text-zinc-400 text-base px-5">
-                            <p>Bạn có thực sự muốn xoá loại sản phẩm này {category.categoryId} ?</p>
+                            <p>Bạn có thực sự muốn xoá loại {category.categoryName} này  ?</p>
                         </div>
                     </div>
                     <div className="mt-5">

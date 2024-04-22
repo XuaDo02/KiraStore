@@ -11,7 +11,7 @@ export default function CategoryManagement() {
         const fetchData = async () => {
             try {
                 const response = await axios.get<CategoriesData[]>(
-                    "https://6615003e2fc47b4cf27db117.mockapi.io/categories"
+                    "https://localhost:7115/api/Category"
                 );
                 setCategories(response.data);
             } catch (error) {
@@ -22,7 +22,7 @@ export default function CategoryManagement() {
         fetchData();
     }, []);
 
-    // HÀM ADD VÀ UPDATE_LIST START
+    // HÀM ADD START
     const [showAddDialog, setShowAddDialog] = useState(false);
     const handleAddClick = () => {
         setShowAddDialog(true);
@@ -31,9 +31,9 @@ export default function CategoryManagement() {
         setCategories([...categories, newCategory]);
         setShowAddDialog(false);
     }
-    // HÀM ADD VÀ UPDATE_LIST END
+    // HÀM ADD END
 
-    // HÀM XOÁ VÀ UPDATE_LIST START
+    // HÀM XOÁ VÀ UPDATE_API START
     const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const handleDeleteClick = (category : CategoriesData) => {
@@ -43,8 +43,8 @@ export default function CategoryManagement() {
       const handleDeleteCategory = async () => {
         if (deleteCategory) {
           try {
-            await axios.delete(`https://6615003e2fc47b4cf27db117.mockapi.io/categories/${deleteCategory.categoryId}`);
-            const updatedCategories = categories.filter(cat => cat.categoryId !== deleteCategory.categoryId);
+            await axios.delete(`https://localhost:7115/api/Category/${deleteCategory.id}`);
+            const updatedCategories = categories.filter(cat => cat.id !== deleteCategory.id);
             setCategories(updatedCategories);
             setShowDeleteDialog(false);
             toast.success("Xoá thành công!")
@@ -71,7 +71,7 @@ export default function CategoryManagement() {
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
                 </div>
-                <div className="grid grid-cols-4 text-customGrayLight text-center items-center w-full text-xs py-3">
+                <div className="grid grid-cols-5 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
                         <div>Mã loại</div>
                     </div>
@@ -81,6 +81,9 @@ export default function CategoryManagement() {
                     <div className="col-span-1">
                         <div>Mô tả loại sản phẩm</div>
                     </div>
+                    <div className="col-span-1">
+                        <div>Ngày tạo</div>
+                    </div>
                     <div className="grid col-span-1 ">
                         <div>Hành động</div>
                     </div>
@@ -89,17 +92,20 @@ export default function CategoryManagement() {
                 <div>
                     {categories.map((category, index) => (
                         <div
-                            key={category.categoryId}
-                            className={`grid grid-cols-4 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
+                            key={category.id}
+                            className={`grid grid-cols-5 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
-                                <div>{category.categoryId}</div>
+                                <div>{category.id}</div>
                             </div>
                             <div className="col-span-1">
                                 <div>{category.categoryName}</div>
                             </div>
                             <div className="col-span-1">
-                                <div>{category.categoryDesciption}</div>
+                                <div>{category.categoryDescription}</div>
+                            </div>
+                            <div className="col-span-1">
+                                {new Date(category.dateCreated).toLocaleDateString()}
                             </div>
                             <div className="grid col-span-1 grid-cols-4">
                                 <div className="col-span-1"></div>

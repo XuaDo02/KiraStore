@@ -8,11 +8,12 @@ export default function SuppilerManagement() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "https://64f015e48a8b66ecf779241a.mockapi.io/api/suppiler"
+                    "https://localhost:7115/api/Supplier"
                 );
                 setSuppliers(response.data);
             } catch (error) {
                 console.error("Error fetching supplier data:", error);
+                console.log(supliers)
             }
         };
 
@@ -27,55 +28,55 @@ export default function SuppilerManagement() {
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
                 </div>
-                <div className="grid grid-cols-7 text-customGrayLight text-center items-center w-full text-xs py-3">
+                <div className="grid grid-cols-12 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
                         <div>Mã nhà cung cấp</div>
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-2">
                         <div>Tên nhà cung cấp</div>
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-2">
                         <div>Địa chỉ </div>
                     </div>
                     <div className="grid col-span-1 ">
                         <div>Số điện thoại</div>
                     </div>
-                    <div className="grid col-span-1 ">
+                    <div className="grid col-span-2 ">
                         <div>Email</div>
                     </div>
-                    <div className="grid col-span-1 ">
+                    <div className="grid col-span-2 ">
                         <div>Ngày bắt đầu hợp đồng</div>
                     </div>
-                    <div className="grid col-span-1 ">
+                    <div className="grid col-span-2 ">
                         <div>Ngày kết thúc hợp đồng</div>
                     </div>
                 </div>
                 <div>
                     {supliers.map((supplier, index) => (
                         <div
-                            key={supplier.supplierId}
-                            className={`grid grid-cols-7 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
+                            key={supplier.id}
+                            className={`grid grid-cols-12 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
-                                <div>{supplier.supplierId}</div>
+                                {supplier.id}
                             </div>
-                            <div className="grid col-span-1">
-                                <div>{supplier.supplierName}</div>
+                            <div className="grid col-span-2">
+                                {supplier.supplierName}
                             </div>
-                            <div className="col-span-1">
-                                <div>{supplier.Address}</div>
-                            </div>
-                            <div className="col-span-1">
-                                <div>{supplier.Phone}</div>
+                            <div className="col-span-2">
+                                {supplier.address}
                             </div>
                             <div className="col-span-1">
-                                <div>{supplier.Email}</div>
+                                {supplier.phone}
                             </div>
-                            <div className="col-span-1">
-                                {new Date(supplier.StartDate).toLocaleDateString()}
+                            <div className="col-span-2">
+                                {supplier.email}
                             </div>
-                            <div className="col-span-1">
-                                {new Date(supplier.EndDate).toLocaleDateString()}
+                            <div className="col-span-2">
+                                {new Date(supplier.startDate).toLocaleDateString()}
+                            </div>
+                            <div className="col-span-2">
+                                {new Date(supplier.endDate).toLocaleDateString()}
                             </div>
                         </div>
                     ))}

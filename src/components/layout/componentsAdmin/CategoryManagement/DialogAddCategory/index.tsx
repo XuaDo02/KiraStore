@@ -5,9 +5,10 @@ import { CategoriesData } from "../../../../../types/categoriesData";
 
 const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => void; onUpdateCategoryList: (newCategory: CategoriesData) => void }) => {
   const [formData, setFormData] = useState({
-    categoryId: "",
+    id: "",
     categoryName: "",
-    categoryDesciption: "",
+    categoryDescription: "",
+    dateCreated: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +23,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
     e.preventDefault();
     try {
       const response = await axios.post<CategoriesData>(
-        "https://6615003e2fc47b4cf27db117.mockapi.io/employee",
+        "https://localhost:7115/api/Category",
         formData
       );
       onUpdateCategoryList(response.data); // Cập nhật danh sách loại sp trong CategoryManagement
@@ -49,7 +50,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
           <div className="mt-5">
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mã loại</label>
-              <input name="categoryId" value={formData.categoryId} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="categoryId" value={formData.id} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Tên loại</label>
@@ -57,7 +58,11 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mô tả loại sản phẩm</label>
-              <input name="categoryDesciption" value={formData.categoryDesciption} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="categoryDesciption" value={formData.categoryDescription} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+            </div>
+            <div className="mb-2 flex items-center text-zinc-400 text-sm">
+              <label className="block font-medium w-1/2 text-left px-5">Ngày tạo</label>
+              <input name="dateCreated" value={formData.dateCreated} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
           </div>
 

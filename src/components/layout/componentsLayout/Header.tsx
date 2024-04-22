@@ -1,6 +1,21 @@
+import { useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
+import { useOnClickOutside } from "usehooks-ts"; // Make sure you have the usehooks-ts library installed
 
 export default function Header() {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const handleOnClick = () => {
+        setIsDropdownOpen(true);
+    }
+
+    const handleClickOutside = () => {
+        setIsDropdownOpen(false);
+    }
+
+    useOnClickOutside(dropdownRef, handleClickOutside);
+
     return (
         <>
             <div className="h-14 grid grid-cols-12 bg-customOrange">
@@ -25,21 +40,43 @@ export default function Header() {
 
                 {/* Phần 3: "Thông tin" */}
                 <div className="flex col-span-5 ml-10">
-                    <div className="grid grid-cols-5 items-center pl-5">
+                    <div className="grid grid-cols-5 items-center pl-5 ">
                         <div className="col-span-1">
-                            <button>Trang chủ</button>
+                            <button className="hover:font-bold">Trang chủ</button>
                         </div>
                         <div className="col-span-1 px-2">
-                            <button>Giới thiệu</button>
+                            <button className="hover:font-bold">Giới thiệu</button>
+                        </div>
+                        <div className="col-span-1 px-2 relative" >
+                            <div className="relative" ref={dropdownRef}>
+                                <button onClick={handleOnClick} className="hover:font-bold">Sản phẩm</button>
+                                {isDropdownOpen && (
+                                    <div
+                                        className="absolute left-0 mt-2 border-customOrange shadow-lg bg-customWhite rounded-md py-1 w-48 z-50"
+                                    >
+                                        <ul>
+                                            <li>
+                                                <a href="/day-chuyen-nu" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Dây chuyền nữ</a>
+                                            </li>
+                                            <li>
+                                                <a href="/lac-tay-nu" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Lắc tay nữ</a>
+                                            </li>
+                                            <li>
+                                                <a href="/nhan-doi" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Nhẫn đôi</a>
+                                            </li>
+                                            <li>
+                                                <a href="/khuyen-tai" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Khuyên tai</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className="col-span-1 px-2">
-                            <button>Sản phẩm</button>
-                        </div>
-                        <div className="col-span-1 px-2">
-                            <button>Tin tức</button>
+                            <button className="hover:font-bold">Tin tức</button>
                         </div>
                         <div className="col-span-1">
-                            <button>Bản đồ</button>
+                            <button className="hover:font-bold">Bản đồ</button>
                         </div>
                     </div>
                 </div>
@@ -70,24 +107,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-
-                {/* Phần 5: "Người dùng" */}
-                {/* <div className="flex col-span-1 items-center pr-8">
-                    <div className="col-span-2 flex">
-                        <div className="col-span-1">
-                            <img
-                                src="/imgHeader/headerUser.png"
-                                className="px-3 pt-2"
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-customGrayLight">Nguyen Van A</span>
-                            <span className="text-customGray">09O123HFHF22</span>
-                        </div>
-                    </div>
-                </div> */}
             </div>
-
         </>
     )
 }

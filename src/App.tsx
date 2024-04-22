@@ -1,11 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { routes } from "./router/router.routes"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import MainAdmin from "./components/layout/MainAdmin"
-//import MainLayout from "./components/layout/MainLayout";
+import { routes } from './router/router.routes';
+import MainLayout from './components/layout/MainLayout';
 
 function App() {
   return (
-    <>
+   <>
       <BrowserRouter>
         <Routes>
           {

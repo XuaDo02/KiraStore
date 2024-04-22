@@ -1,9 +1,9 @@
 export interface SuppliersData {
-    supplierId: number;
+    id: number;
     supplierName: string;
-    Address: string;
-    Phone: number;
-    Email: string;
-    StartDate: Date;
-    EndDate: Date;
+    address: string;
+    phone: number;
+    email: string;
+    startDate: Date;
+    endDate: Date;
 }

@@ -7,14 +7,14 @@ import DialogDeleteEmployee from "./DialogDelete";
 import { toast } from "react-toastify";
 
 const EmployeeManagement = () => {
+
   const [employees, setEmployees] = useState<EmployeeData[]>([]);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeData | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [deleteEmloyee, setDeleteEmployee] = useState<EmployeeData | null>(null);
-
-
+  const [deleteEmployee, setDeleteEmployee] = useState<EmployeeData | null>(null);
   const [showAddDialog, setShowAddDialog] = useState(false);
+
   const handleAddClick = () => {
     setShowAddDialog(true); // Hiển thị DialogAddEmployee khi bấm vào nút "Thêm mới nhân viên"
   }
@@ -28,28 +28,16 @@ const EmployeeManagement = () => {
     setShowEditDialog(true);
   };
 
-  const handleUpdateEmployee = (updatedEmployee: EmployeeData) => {
-    // Tìm kiếm và cập nhật nhân viên trong mảng employees
-    const updatedEmployees = employees.map(emp => {
-      if (emp.id === updatedEmployee.id) {
-        return updatedEmployee;
-      }
-      return emp;
-    });
-    setEmployees(updatedEmployees);
-    setShowEditDialog(false); // Đóng dialog sau khi đã cập nhật xong
-  };
-
-  // HÀM XOÁ + XOÁ API
+  // HÀM XOÁ + XOÁ API START
   const handleDeleteClick = (employee: EmployeeData) => {
     setDeleteEmployee(employee);
     setShowDeleteDialog(true);
   }
   const handleDeleteEmployee = async () => {
-    if (deleteEmloyee) {
+    if (deleteEmployee) {
       try {
-        await axios.delete(`https://6615003e2fc47b4cf27db117.mockapi.io/employee/${deleteEmloyee.id}`);
-        const updatedEmployees = employees.filter(emp => emp.id !== deleteEmloyee.id);
+        await axios.delete(`https://6615003e2fc47b4cf27db117.mockapi.io/employee/${deleteEmployee.id}`);
+        const updatedEmployees = employees.filter(emp => emp.id !== deleteEmployee.id);
         setEmployees(updatedEmployees);
         setShowDeleteDialog(false);
         toast.success("Xoá thành công!")
@@ -58,7 +46,40 @@ const EmployeeManagement = () => {
       }
     }
   };
+  // HÀM XOÁ API END
 
+  // HÀM UPDATE API START
+  const handleUpdateEmployee = async (updatedEmployee: EmployeeData) => {
+    try {
+      // Cập nhật thông tin nhân viên trên API
+      await updateEmployeeOnAPI(updatedEmployee);
+  
+      // Tìm kiếm và cập nhật nhân viên trong mảng employees
+      const updatedEmployees = employees.map(emp => {
+        if (emp.id === updatedEmployee.id) {
+          return updatedEmployee;
+        }
+        return emp;
+      });
+      setEmployees(updatedEmployees);
+      setShowEditDialog(false); // Đóng dialog sau khi đã cập nhật xong
+    } catch (error) {
+      console.error("Error updating employee:", error);
+      toast.error("Cập nhật thông tin nhân viên thất bại!");
+    }
+  };
+  // Hàm gửi yêu cầu cập nhật thông tin nhân viên lên API
+  const updateEmployeeOnAPI = async (updatedEmployee: EmployeeData) => {
+    try {
+      await axios.put(`https://6615003e2fc47b4cf27db117.mockapi.io/employee/${updatedEmployee.id}`, updatedEmployee);
+    } catch (error) {
+      console.error("Error updating employee:", error);
+      toast.error("Cập nhật thông tin nhân viên thất bại!");
+    }
+  };
+  // HÀM UPDATE API END
+
+  //LIST EMPLOYEE START
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,10 +91,9 @@ const EmployeeManagement = () => {
         console.error("Error fetching employee data:", error);
       }
     };
-
     fetchData();
   }, []);
-
+  //LIST EMPLOYEE END
 
   return (
     <>
@@ -138,7 +158,7 @@ const EmployeeManagement = () => {
         </div>
         {showEditDialog && <DialogEditEmployee employee={selectedEmployee} onClose={() => setShowEditDialog(false)} onUpdateEmployee={handleUpdateEmployee} />}
         {showAddDialog && <DialogAddEmployee onClose={() => setShowAddDialog(false)} onUpdateEmployeeList={handleAddEmployee} />}
-        {showDeleteDialog && <DialogDeleteEmployee handleClose={() => setShowDeleteDialog(false)} onDeleteEmployee={handleDeleteEmployee} employee={deleteEmloyee} />}
+        {showDeleteDialog && <DialogDeleteEmployee handleClose={() => setShowDeleteDialog(false)} onDeleteEmployee={handleDeleteEmployee} employee={deleteEmployee} />}
       </div>
 
     </>
