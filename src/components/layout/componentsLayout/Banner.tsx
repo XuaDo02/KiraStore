@@ -61,9 +61,6 @@ const Slideshow: React.FC = () => {
           <img src="/imgMain/homePage9.jpg" />
         </div>
       </div>
-
-      
-
     </>
 
   );

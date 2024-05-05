@@ -1,10 +1,12 @@
 import { Home } from "iconsax-react";
 import { IRoute } from "../interfaces/route";
-import { PATH_BASE, PATH_CATEGORY_MANAGEMENT, PATH_PRODUCT_MANAGEMENT, PATH_SUPPILER_MANAGEMENT, PATH_USER_MANAGEMENT_TAB } from "./router.paths";
+import { PATH_BASE, PATH_CART, PATH_CATEGORY_MANAGEMENT, PATH_CATEGORY_PRODUCTS, PATH_PRODUCT_MANAGEMENT, PATH_SUPPILER_MANAGEMENT, PATH_USER_MANAGEMENT_TAB } from "./router.paths";
 import UserManagementTab from "../components/layout/componentsAdmin/UserManagement/UserManagementTab";
 import CategoryManagement from "../components/layout/componentsAdmin/CategoryManagement";
 import SuppilerManagement from "../components/layout/componentsAdmin/SuppierManagement";
 import ProductManagement from "../components/layout/componentsAdmin/ProductManagement";
+import ProductList from "../components/layout/componentsLayout/ProductList";
+import Cart from "../components/layout/componentsLayout/Cart";
 
 export const routes: IRoute[] = [
     {
@@ -26,5 +28,13 @@ export const routes: IRoute[] = [
     {
         path: PATH_PRODUCT_MANAGEMENT,
         element: <ProductManagement/>
+    },
+    {
+        path: PATH_CART,
+        element: <Cart/>
+    },
+    {
+        path: PATH_CATEGORY_PRODUCTS, // Đường dẫn mới
+        element: <ProductList categoryId={0}/>
     }
 ]

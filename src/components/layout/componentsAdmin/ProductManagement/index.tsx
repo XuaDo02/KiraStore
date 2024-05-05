@@ -11,7 +11,7 @@ export default function ProductManagement() {
         const fetchData = async () => {
             try {
                 const response = await axios.get<ProductData[]>(
-                    "https://64f7dd2f824680fd217ee3e4.mockapi.io/api/products"
+                    "https://localhost:7115/api/Product"
                 );
                 setProducts(response.data);
             } catch (error) {
@@ -41,8 +41,8 @@ export default function ProductManagement() {
       const handleDeleteProduct = async () => {
         if (deleteProduct) {
           try {
-            await axios.delete(`https://64f7dd2f824680fd217ee3e4.mockapi.io/api/products/${deleteProduct.productId}`);
-            const updatedProduct = products.filter(pd => pd.productId !== deleteProduct.productId);
+            await axios.delete(`https://localhost:7115/api/Product/${deleteProduct.id}`);
+            const updatedProduct = products.filter(pd => pd.id !== deleteProduct.id);
             setProducts(updatedProduct);
             setShowDeleteDialog(false);
             toast.success("Xoá thành công!")
@@ -94,11 +94,11 @@ export default function ProductManagement() {
                 <div>
                     {products.map((product, index) => (
                         <div
-                            key={product.productId}
+                            key={product.id}
                             className={`grid grid-cols-8 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
-                                <div>{product.productId}</div>
+                                <div>{product.id}</div>
                             </div>
                             <div className="col-span-1">
                                 <div>{product.productName}</div>
@@ -107,7 +107,7 @@ export default function ProductManagement() {
                                 <div>{product.productImg}</div>
                             </div>
                             <div className="col-span-1">
-                                <div>{product.productDesciption}</div>
+                                <div>{product.id}</div>
                             </div>
                             <div className="col-span-1">
                                 

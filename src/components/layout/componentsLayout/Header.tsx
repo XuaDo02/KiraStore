@@ -1,20 +1,28 @@
 import { useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
-import { useOnClickOutside } from "usehooks-ts"; // Make sure you have the usehooks-ts library installed
+import { useOnClickOutside } from "usehooks-ts";
+import ProductList from "./ProductList";
+import { Link } from "react-router-dom";
 
 export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null); // State để lưu categoryId được chọn
     const dropdownRef = useRef(null);
 
     const handleOnClick = () => {
         setIsDropdownOpen(true);
-    }
+    };
 
     const handleClickOutside = () => {
         setIsDropdownOpen(false);
-    }
+    };
 
     useOnClickOutside(dropdownRef, handleClickOutside);
+
+    const handleCategorySelect = (categoryId: number) => {
+        setSelectedCategoryId(categoryId); // Lưu categoryId được chọn vào state
+        setIsDropdownOpen(false);
+    };
 
     return (
         <>
@@ -47,7 +55,7 @@ export default function Header() {
                         <div className="col-span-1 px-2">
                             <button className="hover:font-bold">Giới thiệu</button>
                         </div>
-                        <div className="col-span-1 px-2 relative" >
+                        <div className="col-span-1 px-2 relative">
                             <div className="relative" ref={dropdownRef}>
                                 <button onClick={handleOnClick} className="hover:font-bold">Sản phẩm</button>
                                 {isDropdownOpen && (
@@ -56,17 +64,12 @@ export default function Header() {
                                     >
                                         <ul>
                                             <li>
-                                                <a href="/day-chuyen-nu" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Dây chuyền nữ</a>
+                                                <button onClick={() => handleCategorySelect(1)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Dây chuyền nữ</button>
                                             </li>
                                             <li>
-                                                <a href="/lac-tay-nu" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Lắc tay nữ</a>
+                                                <button onClick={() => handleCategorySelect(2)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Lắc tay nữ</button>
                                             </li>
-                                            <li>
-                                                <a href="/nhan-doi" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Nhẫn đôi</a>
-                                            </li>
-                                            <li>
-                                                <a href="/khuyen-tai" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Khuyên tai</a>
-                                            </li>
+                                            {/* Thêm các loại sản phẩm khác */}
                                         </ul>
                                     </div>
                                 )}
@@ -86,28 +89,27 @@ export default function Header() {
                     <div className="grid grid-cols-3 ">
                         <div className="col-span-1 px-4">
                             <button>
-                                <img
-                                    src="/imgHeader/headerSearch.png"
-                                />
+                                <img src="/imgHeader/headerSearch.png" />
                             </button>
                         </div>
                         <div className="col-span-1 px-4">
-                            <button>
-                                <img
-                                    src="/imgHeader/headerCart.png"
-                                />
-                            </button>
+                            <Link to="/cart">
+                                <button>
+                                    <img src="/imgHeader/headerCart.png" alt="Cart" />
+                                </button>
+                            </Link>
                         </div>
                         <div className="col-span-1 px-4">
                             <button>
-                                <img
-                                    src="/imgHeader/headerUser.png"
-                                />
+                                <img src="/imgHeader/headerUser.png" />
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Hiển thị danh sách sản phẩm */}
+            {selectedCategoryId && <ProductList categoryId={selectedCategoryId} />}
         </>
-    )
+    );
 }

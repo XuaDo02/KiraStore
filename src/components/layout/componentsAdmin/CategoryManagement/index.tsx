@@ -4,9 +4,12 @@ import axios from "axios";
 import DialogAddCategory from "./DialogAddCategory";
 import { toast } from "react-toastify";
 import DialogDeleteCategory from "./DialogDeleteCategory";
+import DialogEditCategory from "./DialogEditCategory";
 
 export default function CategoryManagement() {
     const [categories, setCategories] = useState<CategoriesData[]>([]);
+    const [showEditDialog, setShowEditDialog] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<CategoriesData | null>(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -32,6 +35,41 @@ export default function CategoryManagement() {
         setShowAddDialog(false);
     }
     // HÀM ADD END
+
+    //HÀM EDIT START
+    const handleEditClick = (category: CategoriesData) => {
+        setSelectedCategory(category);
+        setShowEditDialog(true);
+    };
+    const handleUpdateCategory = async (updatedCategory: CategoriesData) => {
+        try {
+          // Cập nhật thông tin nhân viên trên API
+          await updateCategoryOnAPI(updatedCategory);
+      
+          // Tìm kiếm và cập nhật nhân viên trong mảng employees
+          const updatedCategories = categories.map(emp => {
+            if (emp.id === updatedCategory.id) {
+              return updatedCategory;
+            }
+            return emp;
+          });
+          setCategories(updatedCategories);
+          setShowEditDialog(false); // Đóng dialog sau khi đã cập nhật xong
+        } catch (error) {
+          console.error("Error updating employee:", error);
+          toast.error("Cập nhật thông tin category thất bại!");
+        }
+      };
+      // Hàm gửi yêu cầu cập nhật thông tin nhân viên lên API
+      const updateCategoryOnAPI = async (updatedCategory: CategoriesData) => {
+        try {
+          await axios.put(`https://localhost:7115/api/Category/${updatedCategory.id}`, updatedCategory);
+        } catch (error) {
+          console.error("Error updating category:", error);
+          toast.error("Cập nhật thông tin category thất bại!");
+        }
+      };
+    //HÀM EDIT END
 
     // HÀM XOÁ VÀ UPDATE_API START
     const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
@@ -109,7 +147,9 @@ export default function CategoryManagement() {
                             </div>
                             <div className="grid col-span-1 grid-cols-4">
                                 <div className="col-span-1"></div>
-                                <button className="col-span-1 flex items-center justify-center">
+                                <button 
+                                onClick={() => handleEditClick(category)}
+                                className="col-span-1 flex items-center justify-center">
                                     <img src="/imgEmployee/Edit.png" className="w-5 h-5 mr-1" alt="Edit" /> Sửa
                                 </button>
                                 {/* Delete button */}
@@ -123,6 +163,7 @@ export default function CategoryManagement() {
                         </div>
                     ))}
                 </div>
+                {showEditDialog && <DialogEditCategory category={selectedCategory} onClose={() => setShowEditDialog(false)} onUpdateCategory={handleUpdateCategory} />}
                 {showAddDialog && <DialogAddCategory onClose={() => setShowAddDialog(false)} onUpdateCategoryList={handleAddCategory} />}
                 {showDeleteDialog && <DialogDeleteCategory handleClose={() => setShowDeleteDialog(false)} onDeleteCategory={handleDeleteCategory} category={deleteCategory} />}
             </div>

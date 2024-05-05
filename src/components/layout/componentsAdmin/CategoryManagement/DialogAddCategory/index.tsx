@@ -5,22 +5,25 @@ import { CategoriesData } from "../../../../../types/categoriesData";
 
 const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => void; onUpdateCategoryList: (newCategory: CategoriesData) => void }) => {
   const [formData, setFormData] = useState({
-    id: "",
-    categoryName: "",
-    categoryDescription: "",
-    dateCreated: ""
+    id: 0, // Định dạng id là số nguyên
+    categoryName: "", // Định dạng categoryName là chuỗi
+    categoryDescription: "", // Định dạng categoryDescription là chuỗi
+    dateCreated: new Date().toISOString() // Sử dụng định dạng ngày tháng ISO 8601
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(`Name: ${name}, Value: ${value}`);
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
-  };
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  console.log("Submit button clicked!");
+  console.log("Form Data:", formData);
     try {
       const response = await axios.post<CategoriesData>(
         "https://localhost:7115/api/Category",
@@ -33,6 +36,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
       console.error("Error adding category:", error);
     }
   };
+  console.log()
 
   const handleClose = () => {
     onClose(); // Đóng DialogAddCategory khi nhấn nút "Huỷ" hoặc "Đóng"
@@ -50,7 +54,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
           <div className="mt-5">
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mã loại</label>
-              <input name="categoryId" value={formData.id} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="id" value={formData.id} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Tên loại</label>
@@ -58,14 +62,13 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mô tả loại sản phẩm</label>
-              <input name="categoryDesciption" value={formData.categoryDescription} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="categoryDescription" value={formData.categoryDescription} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Ngày tạo</label>
               <input name="dateCreated" value={formData.dateCreated} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
           </div>
-
           <div className="mt-5">
             <hr className="border-t border-neutral-600 w-full" />
           </div>

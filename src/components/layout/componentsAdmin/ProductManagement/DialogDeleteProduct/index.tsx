@@ -48,8 +48,6 @@ const DialogDeleteProduct: React.FC<DialogDeleteProductProps> = ({ handleClose, 
                         </button>
                     </div>
                 </div>
-
-
             </div>
         </>
     )
