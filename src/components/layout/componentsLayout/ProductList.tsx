@@ -37,7 +37,7 @@ export default function ProductList({ categoryId }: Props) {
             <div className="grid grid-cols-4 gap-4">
                 {products.map(product => (
                     <div key={product.id} className="bg-customWhite p-4 rounded-md relative">
-                        <img src="/imgMain/homePage2.jpg" className="w-full h-48 object-cover mb-4" />
+                        <img src={product.productImg} className="w-full h-48 object-cover mb-4" />
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 duration-300">
                             <div className="bg-customBrown text-white px-10 py-2">
                                 Mua ngay

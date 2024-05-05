@@ -5,3 +5,4 @@ export const PATH_SUPPILER_MANAGEMENT = "/supplierManagement";
 export const PATH_PRODUCT_MANAGEMENT = "/productManagement";
 export const PATH_CATEGORY_PRODUCTS = "/category/:categoryId/products";
 export const PATH_CART = "/cart";
+export const PATH_HOMEPAGE = "/homePage";

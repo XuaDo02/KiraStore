@@ -8,6 +8,7 @@ export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null); // State để lưu categoryId được chọn
     const dropdownRef = useRef(null);
+    
 
     const handleOnClick = () => {
         setIsDropdownOpen(true);
@@ -50,7 +51,7 @@ export default function Header() {
                 <div className="flex col-span-5 ml-10">
                     <div className="grid grid-cols-5 items-center pl-5 ">
                         <div className="col-span-1">
-                            <button className="hover:font-bold">Trang chủ</button>
+                        <Link to="/homePage" className="hover:font-bold">Trang chủ</Link>
                         </div>
                         <div className="col-span-1 px-2">
                             <button className="hover:font-bold">Giới thiệu</button>
@@ -64,7 +65,7 @@ export default function Header() {
                                     >
                                         <ul>
                                             <li>
-                                                <button onClick={() => handleCategorySelect(1)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Dây chuyền nữ</button>
+                                                <button onClick={() => handleCategorySelect(1)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Nhẫn kim cương</button>
                                             </li>
                                             <li>
                                                 <button onClick={() => handleCategorySelect(2)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Lắc tay nữ</button>

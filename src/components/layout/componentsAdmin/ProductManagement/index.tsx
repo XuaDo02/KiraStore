@@ -104,7 +104,7 @@ export default function ProductManagement() {
                                 <div>{product.productName}</div>
                             </div>
                             <div className="col-span-1">
-                                <div>{product.productImg}</div>
+                                <div><img src={product.productImg} /></div>
                             </div>
                             <div className="col-span-1">
                                 <div>{product.id}</div>
