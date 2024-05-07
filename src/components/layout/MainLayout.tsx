@@ -22,18 +22,16 @@ import Banner from "./componentsLayout/Banner"
 
 
 
-function MainLayout ({ children }: { children: any }): JSX.Element {
+function MainLayout({ children }: { children: any }): JSX.Element {
     return (
         <>
-            <div className=" w-screen h-screen">
+            <div className=" w-full h-full">
                 <Header />
-                <Banner/>
-                <div className="flex h-[calc(100vh_-_56px)]">
+                <Banner />
                 <div className="bg-customWhite m-1 rounded-md w-screen max-h-full">
-                        <div className="h-[calc(100%_-_44px)]">{children}</div>
-                    </div>
+                    <div>{children}</div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
             <ToastContainer
                 position="top-center"

@@ -24,7 +24,8 @@ export default {
         customDark2: "#151515",
         customBlack2: "#000000",
         customDark3: "#212121",
-        customRed: "#FF453A"
+        customRed: "#FF453A",
+        customGrayBg: "#f8f8f8"
       },
     },
   },

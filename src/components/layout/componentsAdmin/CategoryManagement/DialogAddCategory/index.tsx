@@ -13,7 +13,6 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
@@ -22,22 +21,18 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  console.log("Submit button clicked!");
-  console.log("Form Data:", formData);
     try {
       const response = await axios.post<CategoriesData>(
         "https://localhost:7115/api/Category",
         formData
       );
       onUpdateCategoryList(response.data); // Cập nhật danh sách loại sp trong CategoryManagement
-      toast.success("Thêm loại sp mới thành công!")
+      toast.success("Thêm loại sp mới thành công!");
       onClose(); // Đóng DialogAddCategory sau khi thêm loại thành công
     } catch (error) {
       console.error("Error adding category:", error);
     }
   };
-  console.log()
-
   const handleClose = () => {
     onClose(); // Đóng DialogAddCategory khi nhấn nút "Huỷ" hoặc "Đóng"
   };
@@ -88,3 +83,5 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
 };
 
 export default DialogAddCategory;
+
+

@@ -9,7 +9,7 @@ function MainAdmin({ children }: { children: any }): JSX.Element {
                 <HeaderAdmin />
                 <div className="flex h-[calc(100vh_-_56px)]">
                     <AsideAdmin />
-                    <div className="bg-customDark2 m-1 rounded-md w-screen max-h-full">
+                    <div className="overflow-y-auto bg-customDark2 m-1 rounded-md w-full max-h-full">
                         <div className="h-[calc(100%_-_44px)]">{children}</div>
                     </div>
                 </div>

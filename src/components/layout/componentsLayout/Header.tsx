@@ -101,9 +101,11 @@ export default function Header() {
                             </Link>
                         </div>
                         <div className="col-span-1 px-4">
+                            <Link to="/register">
                             <button>
                                 <img src="/imgHeader/headerUser.png" />
                             </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,6 @@ export default function SuppilerManagement() {
                 console.log(supliers)
             }
         };
-
         fetchData();
     }, []);
     return (
@@ -30,9 +29,9 @@ export default function SuppilerManagement() {
                 </div>
                 <div className="grid grid-cols-12 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
-                        <div>Mã nhà cung cấp</div>
+                        <div>Mã</div>
                     </div>
-                    <div className="col-span-2">
+                    <div className="col-span-3">
                         <div>Tên nhà cung cấp</div>
                     </div>
                     <div className="col-span-2">
@@ -41,7 +40,7 @@ export default function SuppilerManagement() {
                     <div className="grid col-span-1 ">
                         <div>Số điện thoại</div>
                     </div>
-                    <div className="grid col-span-2 ">
+                    <div className="grid col-span-1 ">
                         <div>Email</div>
                     </div>
                     <div className="grid col-span-2 ">
@@ -60,16 +59,16 @@ export default function SuppilerManagement() {
                             <div className="grid col-span-1">
                                 {supplier.id}
                             </div>
-                            <div className="grid col-span-2">
+                            <div className="grid col-span-3 text-left">
                                 {supplier.supplierName}
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-2 text-left">
                                 {supplier.address}
                             </div>
                             <div className="col-span-1">
                                 {supplier.phone}
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-1 text-left">
                                 {supplier.email}
                             </div>
                             <div className="col-span-2">

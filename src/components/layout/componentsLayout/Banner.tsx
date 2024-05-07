@@ -19,11 +19,11 @@ const Slideshow: React.FC = () => {
           ))}
         </Zoom>
       </div>
-      <div className='mt-5'>
+      {/* <div className='mt-5'>
       <SearchTrendy/>
-      </div>
+      </div> */}
       {/* grid xếp */}
-      <div className="py-8 px-5 bg-customOrange">
+      {/* <div className="py-8 px-5 bg-customOrange">
         <div className="grid grid-cols-2 items-center">
           <div className="col-span-1 flex justify-center items-center">
             <img src="/imgMain/homePage5.jpg" className="max-w-full h-auto" />
@@ -60,7 +60,7 @@ const Slideshow: React.FC = () => {
         <div className="col-span-1 flex justify-center items-center">
           <img src="/imgMain/homePage9.jpg" />
         </div>
-      </div>
+      </div> */}
     </>
 
   );

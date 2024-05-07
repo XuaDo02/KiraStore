@@ -68,7 +68,7 @@ export default function ProductManagement() {
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
                 </div>
-                <div className="grid grid-cols-8 text-customGrayLight text-center items-center w-full text-xs py-3">
+                <div className="grid grid-cols-9 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
                         <div>Mã sản phẩm</div>
                     </div>
@@ -78,7 +78,7 @@ export default function ProductManagement() {
                     <div className="col-span-1">
                         <div>Ảnh sản phẩm</div>
                     </div>
-                    <div className="grid col-span-1 ">
+                    <div className="grid col-span-2 ">
                         <div>Mô tả</div>
                     </div>
                     <div className="grid col-span-1 ">
@@ -95,19 +95,19 @@ export default function ProductManagement() {
                     {products.map((product, index) => (
                         <div
                             key={product.id}
-                            className={`grid grid-cols-8 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
+                            className={`grid grid-cols-9 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
-                            <div className="grid col-span-1">
+                            <div className="grid col-span-1 ">
                                 <div>{product.id}</div>
                             </div>
                             <div className="col-span-1">
                                 <div>{product.productName}</div>
                             </div>
-                            <div className="col-span-1">
-                                <div><img src={product.productImg} /></div>
+                            <div className="col-span-1 flex justify-center">
+                                <div><img src={product.productImg} className="w-16 h-16"/></div>
                             </div>
-                            <div className="col-span-1">
-                                <div>{product.id}</div>
+                            <div className="col-span-2">
+                                <div className="text-left">{product.productDescription}</div>
                             </div>
                             <div className="col-span-1">
                                 

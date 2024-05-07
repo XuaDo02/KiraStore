@@ -1,13 +1,42 @@
+import axios from "axios";
 import { AddSquare, MinusSquare } from "iconsax-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 interface CartItem {
     id: number;
     productName: string;
-    unitPrice: number;
+    productPrice: number;
     quantity: number;
 }
 
 export default function Cart() {
+    const [customerInfo, setCustomerInfo] = useState({
+        userId: 1,
+        name: "",
+        address: "",
+        phone: ""
+    });
+
+    // Hàm xử lý khi người dùng bấm nút "Đặt hàng"
+    const handleSubmitOrder = async (e: any) => {
+        e.preventDefault();
+        try {
+            // Gửi yêu cầu đặt hàng đến máy chủ
+            const response = await axios.post("https://localhost:7115/api/Order", {
+                customerInfo: customerInfo,
+                cartItems: cartItems
+            });
+            console.log("Đơn hàng đã được đặt:", response.data);
+            // Hiển thị thông báo thành công
+            alert("Đơn hàng đã được đặt thành công và lưu vào cơ sở dữ liệu!");
+            // Reset form
+            setCustomerInfo({userId:1, name: "", address: "", phone: "" });
+            setCartItems([]);
+        } catch (error) {
+            console.error("Lỗi khi đặt hàng:", error);
+            // Xử lý lỗi và hiển thị thông báo lỗi cho người dùng
+            alert("Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
+        }
+    };
     const [cartItems, setCartItems] = React.useState<CartItem[]>(
         JSON.parse(localStorage.getItem("cartItems") || "[]")
     );
@@ -43,7 +72,7 @@ export default function Cart() {
 
     const getTotalPrice = () => {
         return cartItems.reduce((total, item) => {
-            return total + item.unitPrice * item.quantity;
+            return total + item.productPrice * item.quantity;
         }, 0)
     }
 
@@ -56,16 +85,16 @@ export default function Cart() {
                     {cartItems.map((item: CartItem) => (
                         <div key={item.id} className="bg-white p-4 shadow rounded-lg mb-4">
                             <h2 className="text-lg font-semibold">{item.productName}</h2>
-                            <p className="text-gray-500">Đơn giá: {item.unitPrice} VND</p>
+                            <p className="text-gray-500">Đơn giá: {item.productPrice} VND</p>
                             <div className="flex items-center">
                                 <p className="mr-2">Số lượng:</p>
                                 <div className="flex items-center">
                                     <button onClick={() => decreaseQuantity(item.id)}>
-                                    <MinusSquare color="#000000" size={20} />
+                                        <MinusSquare color="#000000" size={20} />
                                     </button>
                                     <p className="mx-2">{item.quantity}</p>
                                     <button onClick={() => increaseQuantity(item.id)}>
-                                    <AddSquare color="#000000" size={20}/>
+                                        <AddSquare color="#000000" size={20} />
                                     </button>
                                 </div>
                             </div>
@@ -74,24 +103,24 @@ export default function Cart() {
                     ))}
 
                     {/* Tính tổng tiền */}
-                    <p>Tổng tiền: {getTotalPrice()}</p>
+                    <p>Tổng tiền: {getTotalPrice()} VND</p>
                 </div>
                 {/* Thông tin đặt hàng */}
                 <div className="w-full md:w-1/2 lg:w-1/2 px-4">
                     <div className="bg-white p-4 shadow rounded-lg">
                         <h2 className="text-lg font-semibold mb-4">Thông tin đặt hàng</h2>
-                        <form>
+                        <form onSubmit={handleSubmitOrder}>
                             <div className="mb-4">
-                                <label className="block text-sm font-semibold mb-2" htmlFor="name">Họ và tên:</label>
-                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="name" name="name" />
+                                <label htmlFor="name">Họ và tên:</label>
+                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="name" name="name" value={customerInfo.name} onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })} />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-sm font-semibold mb-2" htmlFor="address">Địa chỉ nhận hàng:</label>
-                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="address" name="address" />
+                                <label htmlFor="address">Địa chỉ nhận hàng:</label>
+                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="address" name="address" value={customerInfo.address} onChange={(e) => setCustomerInfo({ ...customerInfo, address: e.target.value })} />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-sm font-semibold mb-2" htmlFor="phone">Số điện thoại:</label>
-                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="phone" name="phone" />
+                                <label htmlFor="phone">Số điện thoại:</label>
+                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="phone" name="phone" value={customerInfo.phone} onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })} />
                             </div>
                             <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" type="submit">Đặt hàng</button>
                         </form>

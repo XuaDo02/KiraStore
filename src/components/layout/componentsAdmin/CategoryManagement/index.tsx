@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 import DialogDeleteCategory from "./DialogDeleteCategory";
 import DialogEditCategory from "./DialogEditCategory";
 
-export default function CategoryManagement() {
+const CategoryManagement = () => {
     const [categories, setCategories] = useState<CategoriesData[]>([]);
     const [showEditDialog, setShowEditDialog] = useState(false);
+    const [showAddDialog, setShowAddDialog] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<CategoriesData | null>(null);
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +27,6 @@ export default function CategoryManagement() {
     }, []);
 
     // HÀM ADD START
-    const [showAddDialog, setShowAddDialog] = useState(false);
     const handleAddClick = () => {
         setShowAddDialog(true);
     }
@@ -43,24 +43,24 @@ export default function CategoryManagement() {
     };
     const handleUpdateCategory = async (updatedCategory: CategoriesData) => {
         try {
-          // Cập nhật thông tin nhân viên trên API
+          // Cập nhật thông tin loại trên API
           await updateCategoryOnAPI(updatedCategory);
       
-          // Tìm kiếm và cập nhật nhân viên trong mảng employees
-          const updatedCategories = categories.map(emp => {
-            if (emp.id === updatedCategory.id) {
+          // Tìm kiếm và cập nhật loại trong mảng categories
+          const updatedCategories = categories.map(cat => {
+            if (cat.id === updatedCategory.id) {
               return updatedCategory;
             }
-            return emp;
+            return cat;
           });
           setCategories(updatedCategories);
           setShowEditDialog(false); // Đóng dialog sau khi đã cập nhật xong
         } catch (error) {
-          console.error("Error updating employee:", error);
+          console.error("Error updating category:", error);
           toast.error("Cập nhật thông tin category thất bại!");
         }
       };
-      // Hàm gửi yêu cầu cập nhật thông tin nhân viên lên API
+      // Hàm gửi yêu cầu cập nhật thông tin loại hàng lên API
       const updateCategoryOnAPI = async (updatedCategory: CategoriesData) => {
         try {
           await axios.put(`https://localhost:7115/api/Category/${updatedCategory.id}`, updatedCategory);
@@ -93,7 +93,7 @@ export default function CategoryManagement() {
       };
     return (
         <>
-            <div className="relative h-35px">
+            <div className="relative">
                 <div className="text-base text-customWhite border-customYellow bg-gradient-to-t from-customGrayDark to-customDark2">
                     <h1 className="py-4 pl-5">Quản lý danh mục sản phẩm</h1>
                 </div>
@@ -127,7 +127,7 @@ export default function CategoryManagement() {
                     </div>
                 </div>
 
-                <div>
+                <div className="relative h-[calc(100vh - 240px)] overflow-y-auto">
                     {categories.map((category, index) => (
                         <div
                             key={category.id}
@@ -170,3 +170,5 @@ export default function CategoryManagement() {
         </>
     )
 }
+
+export default CategoryManagement;

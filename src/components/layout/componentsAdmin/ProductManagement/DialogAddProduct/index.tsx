@@ -23,7 +23,7 @@ const DialogAddProduct = ({ onClose, onUpdateProductList }: { onClose: () => voi
     e.preventDefault();
     try {
       const response = await axios.post<ProductData>(
-        "https://64f7dd2f824680fd217ee3e4.mockapi.io/api/products",
+        "https://localhost:7115/api/Product",
         formData
       );
       onUpdateProductList(response.data); // Cập nhật danh sách sp trong ProductManagement
@@ -50,15 +50,28 @@ const DialogAddProduct = ({ onClose, onUpdateProductList }: { onClose: () => voi
           <div className="mt-5">
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mã loại</label>
-              <input name="productId" value={formData.productId} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input 
+              name="productId" 
+              value={formData.productId} 
+              onChange={handleChange} 
+              className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Tên loại</label>
-              <input name="productName" value={formData.productName} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <label className="block font-medium w-1/2 text-left px-5">Tên sản phẩm</label>
+              <input 
+              name="productName" 
+              value={formData.productName} 
+              onChange={handleChange} 
+              className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Ảnh sản phẩm</label>
-              <input name="productImg" value={formData.productImg}onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input 
+              type="file" 
+              name="productImg" 
+              value={formData.productImg}
+              onChange={handleChange} 
+              className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mô tả sản phẩm</label>

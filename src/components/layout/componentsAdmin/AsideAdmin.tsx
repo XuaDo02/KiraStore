@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 
 export default function Aside() {
-  
+
   const [showDropdown, setShowDropdown] = useState(false);
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -54,10 +54,12 @@ export default function Aside() {
           )}
         </li>
         <li className="px-1 py-1 flex flex-col items-center">
-          <img src="/imgAsideAd/box.png" className="mb-2" />
-          <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
-            Quản lý đơn hàng
-          </span>
+          <a href="/orderManagement" className="text-center">
+            <img src="/imgAsideAd/box.png" className="mb-2 pl-7" />
+            <span className="text-center text-xs text-customGrayDark hover:bg-customYellow hover:text-black">
+              Quản lý đơn hàng
+            </span>
+          </a>
         </li>
         <li className="px-1 py-1 flex flex-col items-center">
           <a href="/supplierManagement" className="text-center">

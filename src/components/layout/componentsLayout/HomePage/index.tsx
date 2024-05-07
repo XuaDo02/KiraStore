@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductData } from "../../../../types/productData";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
     const [products, setProducts] = useState<ProductData[]>([]);
@@ -34,21 +35,20 @@ export default function HomePage() {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
     };
 
-
     return (
         <>
-            <div className="container mx-auto py-8">
-                <h1 className="text-3xl font-bold mb-8">Sản phẩm mùa hè mới</h1>
-                <div className="grid grid-cols-4 gap-4">
+            <div className="container mx-auto py-8 bg-customWhite">
+                <h1 className="text-3xl font-bold mb-8 text-customBlue">Sản phẩm mùa hè mới</h1>
+                <div className="grid grid-cols-4 gap-4 ">
                     {products.map((product) => (
-                        <div key={product.id} className="bg-white p-4 shadow rounded-lg">
+                        <div key={product.id} className=" p-4 shadow rounded-lg bg-customGrayBg">
                             <div className="relative">
-                                <img src={product.productImg} className="w-full h-48 object-cover mb-4" alt={product.productName} />
-                                <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-customBrown text-white px-3 py-2 rounded mt-2 opacity-0 hover:opacity-100">Xem chi tiết</button>
+                                <img src={product.productImg} className="w-full h-56 object-cover mb-4" alt={product.productName} />
+                                <Link to="/productDetail" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-customBrown text-white px-3 py-2 rounded mt-2 opacity-0 hover:opacity-100">Xem chi tiết</Link>
+                                <p className="font-semibold">{product.productName}</p>
+                                <p>Giá: {product.productPrice} VND</p>
+                                <button className="bg-customBlue text-white px-3 py-2 rounded ml-14 mt-2" onClick={() => addToCart(product)}>Thêm vào giỏ hàng</button>
                             </div>
-                            <p className="font-semibold">{product.productName}</p>
-                            <p>Giá: {product.unitPrice} VND</p>
-                            <button className="bg-blue-500 text-white px-3 py-2 rounded mt-2 ml-14" onClick={() => addToCart(product)}>Thêm vào giỏ hàng</button>
                             {/* <Link to="/cart" className="block mt-2 text-center text-blue-500">Xem giỏ hàng</Link> */}
                         </div>
                     ))}
