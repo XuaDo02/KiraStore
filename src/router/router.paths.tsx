@@ -6,3 +6,6 @@ export const PATH_PRODUCT_MANAGEMENT = "/productManagement";
 export const PATH_CATEGORY_PRODUCTS = "/category/:categoryId/products";
 export const PATH_CART = "/cart";
 export const PATH_HOMEPAGE = "/homePage";
+export const PATH_ORDER = "/orderManagement";
+export const PATH_PRODUCT_DETAIL = "/productDetail";
+export const PATH_REGISTER = "/register";
