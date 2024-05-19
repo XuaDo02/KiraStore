@@ -1,10 +1,10 @@
 export interface EmployeeData {
     id: number;
-    UserName: string;
-    DateOfBirth: string;
-    Gender: string;
-    Email: string;
-    Phone: number;
-    Address: string;
-    Position: string;
+    userName: string;
+    address: string;
+    gender: string;
+    email: string;
+    phone: number;
+    password: string;
+    role: string;
 }

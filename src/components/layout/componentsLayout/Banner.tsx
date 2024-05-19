@@ -22,45 +22,6 @@ const Slideshow: React.FC = () => {
       {/* <div className='mt-5'>
       <SearchTrendy/>
       </div> */}
-      {/* grid xếp */}
-      {/* <div className="py-8 px-5 bg-customOrange">
-        <div className="grid grid-cols-2 items-center">
-          <div className="col-span-1 flex justify-center items-center">
-            <img src="/imgMain/homePage5.jpg" className="max-w-full h-auto" />
-          </div>
-          <div className="col-span-1 grid grid-cols-2 gap-4">
-            <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage4.jpg" className="max-w-full h-48" />
-            </div>
-            <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage2.jpg" className="max-w-full h-48" />
-            </div>
-            <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage3.jpg" className="max-w-full h-48 mt-7" />
-            </div>
-            <div className="flex justify-center items-center">
-              <img src="/imgMain/homePage4.jpg" className="max-w-full h-48 mt-7" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-4 pt-10 bg-customWhite">
-        <div className="col-start-2 flex justify-center items-center">
-          <img src="/imgMain/homePage7.jpg" />
-        </div>
-        <div className="col-span-1 flex justify-center items-center">
-          <h1 className="text-4xl text-customBrown">Jewelry tells <br /> a great story</h1>
-        </div>
-      </div>
-      <div className="grid grid-cols-4 items-center bg-customWhite">
-        <div className="col-start-2 flex justify-center items-center">
-          <h1 className="text-4xl text-customBrown">Jewelry tells <br /> a great story</h1>
-        </div>
-        <div className="col-span-1 flex justify-center items-center">
-          <img src="/imgMain/homePage9.jpg" />
-        </div>
-      </div> */}
     </>
 
   );

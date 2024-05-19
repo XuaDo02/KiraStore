@@ -11,30 +11,34 @@ interface CartItem {
 export default function Cart() {
     const [customerInfo, setCustomerInfo] = useState({
         userId: 1,
-        name: "",
+        CustomerName : "",
         address: "",
-        phone: ""
+        phone: "",
+        Details: [],
     });
+    const config = {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+          'Content-Type': 'application/json' 
+        }
+    };
 
     // Hàm xử lý khi người dùng bấm nút "Đặt hàng"
     const handleSubmitOrder = async (e: any) => {
         e.preventDefault();
         try {
-            // Gửi yêu cầu đặt hàng đến máy chủ
-            const response = await axios.post("https://localhost:7115/api/Order", {
-                customerInfo: customerInfo,
-                cartItems: cartItems
-            });
+            const response = await axios.post("https://localhost:7115/api/Order", {...customerInfo, Details: cartItems}, config);
+            console.log(response)
             console.log("Đơn hàng đã được đặt:", response.data);
             // Hiển thị thông báo thành công
             alert("Đơn hàng đã được đặt thành công và lưu vào cơ sở dữ liệu!");
             // Reset form
-            setCustomerInfo({userId:1, name: "", address: "", phone: "" });
+            setCustomerInfo({userId:1, CustomerName : "", address: "", phone: "", Details: [] });
             setCartItems([]);
         } catch (error) {
             console.error("Lỗi khi đặt hàng:", error);
             // Xử lý lỗi và hiển thị thông báo lỗi cho người dùng
-            alert("Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
+            alert("Đã xảy ra lỗi khi đặt hàng. Vui lòng kiểm tra đăng nhập!");
         }
     };
     const [cartItems, setCartItems] = React.useState<CartItem[]>(
@@ -112,7 +116,7 @@ export default function Cart() {
                         <form onSubmit={handleSubmitOrder}>
                             <div className="mb-4">
                                 <label htmlFor="name">Họ và tên:</label>
-                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="name" name="name" value={customerInfo.name} onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })} />
+                                <input className="w-full border border-gray-300 rounded-md px-3 py-2" type="text" id="name" name="name" value={customerInfo.CustomerName } onChange={(e) => setCustomerInfo({ ...customerInfo, CustomerName : e.target.value })} />
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="address">Địa chỉ nhận hàng:</label>

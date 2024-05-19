@@ -2,7 +2,16 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import AsideAdmin from "./componentsAdmin/AsideAdmin"
 import HeaderAdmin from "./componentsAdmin/HeaderAdmin"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 function MainAdmin({ children }: { children: any }): JSX.Element {
+    const navigate = useNavigate();
+    useEffect(() => {
+        let tokenAdmin: string | null = localStorage.getItem("token-admin");
+        if(tokenAdmin == null) {
+            navigate("/admin/login");
+        }
+    }, []);
     return (
         <>
             <div className=" w-screen text-secondary bg-black h-screen">

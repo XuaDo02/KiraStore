@@ -78,15 +78,15 @@ export default function ProductManagement() {
                     <div className="col-span-1">
                         <div>Ảnh sản phẩm</div>
                     </div>
-                    <div className="grid col-span-2 ">
+                    <div className="grid col-span-4">
                         <div>Mô tả</div>
                     </div>
-                    <div className="grid col-span-1 ">
+                    {/* <div className="grid col-span-1 ">
                         <div>Loại sản phẩm</div>
                     </div>
                     <div className="grid col-span-1 ">
                         <div>Nhà cung cấp</div>
-                    </div>
+                    </div> */}
                     <div className="grid col-span-2 ">
                         <div>Action</div>
                     </div>
@@ -106,15 +106,15 @@ export default function ProductManagement() {
                             <div className="col-span-1 flex justify-center">
                                 <div><img src={product.productImg} className="w-16 h-16"/></div>
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-4">
                                 <div className="text-left">{product.productDescription}</div>
                             </div>
-                            <div className="col-span-1">
+                            {/* <div className="col-span-1">
                                 
                             </div>
                             <div className="col-span-1">
                                 
-                            </div>
+                            </div> */}
                             <div className="grid col-span-2 grid-cols-4">
                                 <div className="col-span-1"></div>
                                 <button className="col-span-1 flex items-center justify-center">

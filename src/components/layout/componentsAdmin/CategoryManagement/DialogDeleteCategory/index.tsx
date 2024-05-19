@@ -10,12 +10,12 @@ const DialogDeleteCategory: React.FC<DialogDeleteCategoryProps> = ({ handleClose
         try {
             await onDeleteCategory();
         } catch (error) {
-            console.error("Error deleting employee:", error);
+            console.error("Error deleting categories:", error);
         }
     };
-    // Kiểm tra xem employee có null hay không trước khi sử dụng
+    // Kiểm tra xem categories có null hay không trước khi sử dụng
     if (!category) {
-        return null; // hoặc có thể trả về một phần tử JSX khác để hiển thị khi employee là null
+        return null; // hoặc có thể trả về một phần tử JSX khác để hiển thị khi categories là null
     }
     return (
         <>
@@ -47,8 +47,6 @@ const DialogDeleteCategory: React.FC<DialogDeleteCategoryProps> = ({ handleClose
                         </button>
                     </div>
                 </div>
-
-
             </div>
         </>
     )

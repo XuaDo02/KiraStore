@@ -1,7 +1,10 @@
 export interface CustomerData {
-    customerId: number;
-    customerName: string;
-    Address: string;
-    Phone: number;
-    Email: string;
+    id: number;
+    userName: string;
+    // address: string;
+    gender: string;
+    email: string;
+    phone: number;
+    password: string;
+    role: string;
 }

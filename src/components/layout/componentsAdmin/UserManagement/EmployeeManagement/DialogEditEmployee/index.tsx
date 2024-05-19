@@ -41,31 +41,31 @@ const DialogEditEmployee: React.FC<Props> = ({ employee, onClose, onUpdateEmploy
           </div>
           <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Họ và tên</label>
-            <input type="text" name="UserName" value={editedEmployee?.UserName || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
-          </div>
-          <div className="mb-2 flex items-center text-zinc-400 text-sm">
-            <label className="block text-sm font-medium w-1/2 text-left px-5">Ngày sinh</label>
-            <input type="text" name="DateOfBirth" value={editedEmployee?.DateOfBirth || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
-          </div>
-          <div className="mb-2 flex items-center text-zinc-400 text-sm">
-            <label className="block text-sm font-medium w-1/2 text-left px-5">Giới tính</label>
-            <input type="text" name="Gender" value={editedEmployee?.Gender || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
-          </div>
-          <div className="mb-2 flex items-center text-zinc-400 text-sm">
-            <label className="block text-sm font-medium w-1/2 text-left px-5">Email</label>
-            <input type="text" name="Email" value={editedEmployee?.Email || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
-          </div>
-          <div className="mb-2 flex items-center text-zinc-400 text-sm">
-            <label className="block text-sm font-medium w-1/2 text-left px-5">Số điện thoại</label>
-            <input type="text" name="Phone" value={editedEmployee?.Phone || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+            <input type="text" name="userName" value={editedEmployee?.userName || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
           <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Địa chỉ</label>
-            <input type="text" name="Address" value={editedEmployee?.Address || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+            <input type="text" name="address" value={editedEmployee?.address || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+          </div>
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
+            <label className="block text-sm font-medium w-1/2 text-left px-5">Giới tính</label>
+            <input type="text" name="gender" value={editedEmployee?.gender || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+          </div>
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
+            <label className="block text-sm font-medium w-1/2 text-left px-5">Email</label>
+            <input type="text" name="email" value={editedEmployee?.email|| ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+          </div>
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
+            <label className="block text-sm font-medium w-1/2 text-left px-5">Số điện thoại</label>
+            <input type="text" name="phone" value={editedEmployee?.phone || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
           <div className="mb-2 flex items-center text-zinc-400 text-sm">
             <label className="block text-sm font-medium w-1/2 text-left px-5">Chức vụ</label>
-            <input type="text" name="Position" value={editedEmployee?.Position || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+            <input type="text" name="role" value={editedEmployee?.role || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
+          </div>
+          <div className="mb-2 flex items-center text-zinc-400 text-sm">
+            <label className="block text-sm font-medium w-1/2 text-left px-5">Mật khẩu</label>
+            <input type="text" name="password" value={editedEmployee?.password || ''} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" onChange={handleInputChange} />
           </div>
         </div>
 

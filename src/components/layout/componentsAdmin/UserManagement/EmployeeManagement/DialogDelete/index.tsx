@@ -27,7 +27,7 @@ const DialogDeleteEmployee: React.FC<DialogDeleteEmployeeProps> = ({ handleClose
                     </div>
                     <div className="my-16">
                         <div className=" flex items-center text-zinc-400 text-base px-5">
-                            <p>Bạn có thực sự muốn xoá nhân viên này {employee.UserName} ?</p>
+                            <p>Bạn có thực sự muốn xoá nhân viên {employee.userName} này ?</p>
                         </div>
                     </div>
                     <div className="mt-5">
@@ -47,8 +47,6 @@ const DialogDeleteEmployee: React.FC<DialogDeleteEmployeeProps> = ({ handleClose
                         </button>
                     </div>
                 </div>
-
-
             </div>
         </>
     )

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { CategoriesData } from "../../../../types/categoriesData";
 import axios from "axios";
 import DialogAddCategory from "./DialogAddCategory";
@@ -8,89 +8,87 @@ import DialogEditCategory from "./DialogEditCategory";
 
 const CategoryManagement = () => {
     const [categories, setCategories] = useState<CategoriesData[]>([]);
+    const [showAddDialog, setShowAddDialog] = useState(false)
     const [showEditDialog, setShowEditDialog] = useState(false);
-    const [showAddDialog, setShowAddDialog] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<CategoriesData | null>(null);
+    const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.get<CategoriesData[]>(
-                    "https://localhost:7115/api/Category"
-                );
-                setCategories(response.data);
-            } catch (error) {
-                console.error("Error fetching categories data:", error);
-            }
+          try {
+            const response = await axios.get<CategoriesData[]>(
+              "https://localhost:7115/api/Category"
+            );
+            setCategories(response.data);
+          } catch (error) {
+            console.error("Error fetching categories data:", error);
+          }
         };
-
+    
         fetchData();
-    }, []);
+      }, []);
 
-    // HÀM ADD START
-    const handleAddClick = () => {
+      const handleAddClick = () => {
         setShowAddDialog(true);
-    }
-    const handleAddCategory = (newCategory: CategoriesData) => {
-        setCategories([...categories, newCategory]);
+      };
+    
+      const handleAddCategory = (newCategory: CategoriesData) => {
+        setCategories(prevCategories => [...prevCategories, newCategory]);
         setShowAddDialog(false);
-    }
-    // HÀM ADD END
+      };
 
-    //HÀM EDIT START
     const handleEditClick = (category: CategoriesData) => {
         setSelectedCategory(category);
         setShowEditDialog(true);
     };
+
     const handleUpdateCategory = async (updatedCategory: CategoriesData) => {
         try {
-          // Cập nhật thông tin loại trên API
-          await updateCategoryOnAPI(updatedCategory);
-      
-          // Tìm kiếm và cập nhật loại trong mảng categories
-          const updatedCategories = categories.map(cat => {
-            if (cat.id === updatedCategory.id) {
-              return updatedCategory;
-            }
-            return cat;
-          });
-          setCategories(updatedCategories);
-          setShowEditDialog(false); // Đóng dialog sau khi đã cập nhật xong
-        } catch (error) {
-          console.error("Error updating category:", error);
-          toast.error("Cập nhật thông tin category thất bại!");
-        }
-      };
-      // Hàm gửi yêu cầu cập nhật thông tin loại hàng lên API
-      const updateCategoryOnAPI = async (updatedCategory: CategoriesData) => {
-        try {
-          await axios.put(`https://localhost:7115/api/Category/${updatedCategory.id}`, updatedCategory);
-        } catch (error) {
-          console.error("Error updating category:", error);
-          toast.error("Cập nhật thông tin category thất bại!");
-        }
-      };
-    //HÀM EDIT END
+            await updateCategoryOnAPI(updatedCategory);
 
-    // HÀM XOÁ VÀ UPDATE_API START
-    const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
-    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+            const updatedCategories = categories.map(cat => {
+                if (cat.id === updatedCategory.id) {
+                    return updatedCategory;
+                }
+                return cat;
+            });
+            setCategories(updatedCategories);
+            setShowEditDialog(false);
+        } catch (error) {
+            console.error("Error updating category:", error);
+            toast.error("Cập nhật thông tin category thất bại!");
+        }
+    };
+
+    const updateCategoryOnAPI = async (updatedCategory: CategoriesData) => {
+        try {
+            await axios.put(`https://localhost:7115/api/Category/${updatedCategory.id}`, updatedCategory);
+        } catch (error) {
+            console.error("Error updating category:", error);
+            toast.error("Cập nhật thông tin category thất bại!");
+        }
+    };
+
     const handleDeleteClick = (category : CategoriesData) => {
         setDeleteCategory(category);
         setShowDeleteDialog(true);
-      }
-      const handleDeleteCategory = async () => {
+    };
+
+    const handleDeleteCategory = async () => {
         if (deleteCategory) {
-          try {
-            await axios.delete(`https://localhost:7115/api/Category/${deleteCategory.id}`);
-            const updatedCategories = categories.filter(cat => cat.id !== deleteCategory.id);
-            setCategories(updatedCategories);
-            setShowDeleteDialog(false);
-            toast.success("Xoá thành công!")
-          } catch (error) {
-            console.error("Error deleting employee:", error);
-          }
+            try {
+                await axios.delete(`https://localhost:7115/api/Category/${deleteCategory.id}`);
+                const updatedCategories = categories.filter(cat => cat.id !== deleteCategory.id);
+                setCategories(updatedCategories);
+                setShowDeleteDialog(false);
+                toast.success("Xoá thành công!")
+            } catch (error) {
+                console.error("Error deleting category:", error);
+            }
         }
-      };
+    };
+
     return (
         <>
             <div className="relative">
@@ -104,7 +102,6 @@ const CategoryManagement = () => {
                     >
                         Thêm mới loại sản phẩm
                     </button>
-
                 </div>
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
@@ -130,7 +127,7 @@ const CategoryManagement = () => {
                 <div className="relative h-[calc(100vh - 240px)] overflow-y-auto">
                     {categories.map((category, index) => (
                         <div
-                            key={category.id}
+                            key={category.id} // Thêm key ở đây
                             className={`grid grid-cols-5 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
@@ -168,7 +165,7 @@ const CategoryManagement = () => {
                 {showDeleteDialog && <DialogDeleteCategory handleClose={() => setShowDeleteDialog(false)} onDeleteCategory={handleDeleteCategory} category={deleteCategory} />}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default CategoryManagement;

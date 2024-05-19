@@ -8,7 +8,7 @@ export default function CustomerInforManagement() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "https://64f7dd2f824680fd217ee3e4.mockapi.io/api/customers"
+                    "https://localhost:7115/api/User/role/Kh%C3%A1ch%20h%C3%A0ng"
                 );
                 setCustomer(response.data);
             } catch (error) {
@@ -35,35 +35,29 @@ export default function CustomerInforManagement() {
                         <div>Tên khách hàng</div>
                     </div>
                     <div className="col-span-1">
-                        <div>Địa chỉ </div>
+                        <div>Địa chỉ email</div>
                     </div>
                     <div className="grid col-span-1 ">
                         <div>Số điện thoại</div>
-                    </div>
-                    <div className="grid col-span-1 ">
-                        <div>Email</div>
                     </div>
                 </div>
                 <div>
                     {customers.map((customer, index) => (
                         <div
-                            key={customer.customerId}
+                            key={customer.id}
                             className={`grid grid-cols-5 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
-                                <div>{customer.customerId}</div>
+                                <div>{customer.id}</div>
                             </div>
                             <div className="grid col-span-1">
-                                <div>{customer.customerName}</div>
+                                <div>{customer.userName}</div>
                             </div>
                             <div className="col-span-1">
-                                <div>{customer.Address}</div>
+                                <div>{customer.email}</div>
                             </div>
                             <div className="col-span-1">
-                                <div>{customer.Phone}</div>
-                            </div>
-                            <div className="col-span-1">
-                                <div>{customer.Email}</div>
+                                <div>{customer.phone}</div>
                             </div>
                         </div>
                     ))}

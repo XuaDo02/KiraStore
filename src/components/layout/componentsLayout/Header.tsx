@@ -1,28 +1,21 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Marquee from "react-fast-marquee";
-import { useOnClickOutside } from "usehooks-ts";
-import ProductList from "./ProductList";
 import { Link } from "react-router-dom";
+import DropdownCatalog from "./DropdownCatalog";
+import axios from "axios";
+import { ProductData } from "../../../types/productData";
 
 export default function Header() {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null); // State để lưu categoryId được chọn
-    const dropdownRef = useRef(null);
-    
-
-    const handleOnClick = () => {
-        setIsDropdownOpen(true);
-    };
-
-    const handleClickOutside = () => {
-        setIsDropdownOpen(false);
-    };
-
-    useOnClickOutside(dropdownRef, handleClickOutside);
-
-    const handleCategorySelect = (categoryId: number) => {
-        setSelectedCategoryId(categoryId); // Lưu categoryId được chọn vào state
-        setIsDropdownOpen(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState<ProductData[]>([]);
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get(`https://localhost:7115/api/Product/search?productName=${searchTerm}`);
+            setSearchResults(response.data);
+        } catch (error) {
+            console.error("Error searching for products:", error);
+            setSearchResults([]);
+        }
     };
 
     return (
@@ -48,71 +41,68 @@ export default function Header() {
                 </div>
 
                 {/* Phần 3: "Thông tin" */}
-                <div className="flex col-span-5 ml-10">
-                    <div className="grid grid-cols-5 items-center pl-5 ">
+                <div className="flex col-span-4 ml-10">
+                    <div className="grid grid-cols-5 items-center ">
                         <div className="col-span-1">
-                        <Link to="/homePage" className="hover:font-bold">Trang chủ</Link>
+                            <Link to="/homePage" className="hover:font-bold">Sản phẩm</Link>
                         </div>
-                        <div className="col-span-1 px-2">
-                            <button className="hover:font-bold">Giới thiệu</button>
+                        <div className="col-span-1 pl-2">
+                            <Link to="/blogPage" className="hover:font-bold">Giới thiệu</Link>
                         </div>
-                        <div className="col-span-1 px-2 relative">
-                            <div className="relative" ref={dropdownRef}>
-                                <button onClick={handleOnClick} className="hover:font-bold">Sản phẩm</button>
-                                {isDropdownOpen && (
-                                    <div
-                                        className="absolute left-0 mt-2 border-customOrange shadow-lg bg-customWhite rounded-md py-1 w-48 z-50"
-                                    >
-                                        <ul>
-                                            <li>
-                                                <button onClick={() => handleCategorySelect(1)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Nhẫn kim cương</button>
-                                            </li>
-                                            <li>
-                                                <button onClick={() => handleCategorySelect(2)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-pink-600">Lắc tay nữ</button>
-                                            </li>
-                                            {/* Thêm các loại sản phẩm khác */}
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div className="col-span-1 px-2">
-                            <button className="hover:font-bold">Tin tức</button>
-                        </div>
-                        <div className="col-span-1">
-                            <button className="hover:font-bold">Bản đồ</button>
+                        <div className="col-span-3 pl-3 relative">
+                            <DropdownCatalog />
                         </div>
                     </div>
                 </div>
 
-                {/* Phần 4: "Img" */}
-                <div className="flex col-span-2 items-center">
-                    <div className="grid grid-cols-3 ">
-                        <div className="col-span-1 px-4">
-                            <button>
-                                <img src="/imgHeader/headerSearch.png" />
+                {/* Phần 4: Ô nhập liệu tìm kiếm */}
+                <div className="flex col-span-3 items-center">
+                    <div className="grid grid-cols-6 ">
+                        <div className="col-span-3 px-4">
+                            <input
+                                type="text"
+                                className="border border-gray-300 rounded-lg px-3 py-1 w-full focus:outline-none focus:border-blue-500"
+                                placeholder="Tìm kiếm..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                        <div className="col-span-1 pt-1">
+                            <button className="focus:outline-none" onClick={handleSearch}>
+                                <img src="/imgHeader/headerSearch.png" alt="Search" />
                             </button>
                         </div>
-                        <div className="col-span-1 px-4">
+                        <div className="col-span-1 pt-1">
                             <Link to="/cart">
                                 <button>
                                     <img src="/imgHeader/headerCart.png" alt="Cart" />
                                 </button>
                             </Link>
                         </div>
-                        <div className="col-span-1 px-4">
-                            <Link to="/register">
-                            <button>
-                                <img src="/imgHeader/headerUser.png" />
-                            </button>
+                        <div className="col-span-1 pt-1">
+                            <Link to="/login">
+                                <button>
+                                    <img src="/imgHeader/headerUser.png" alt="User" />
+                                </button>
                             </Link>
                         </div>
+
                     </div>
                 </div>
-            </div>
 
-            {/* Hiển thị danh sách sản phẩm */}
-            {selectedCategoryId && <ProductList categoryId={selectedCategoryId} />}
+                {/* Hiển thị kết quả tìm kiếm (nếu có) */}
+                {Array.isArray(searchResults) && searchResults.length > 0 && (
+                    <div className="col-span-12">
+                        <h2>Kết quả tìm kiếm:</h2>
+                        <ul>
+                            {searchResults.map((product) => (
+                                <li key={product.id}>{product.productName}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+            </div>
         </>
     );
 }

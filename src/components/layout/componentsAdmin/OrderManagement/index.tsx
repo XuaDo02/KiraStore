@@ -17,6 +17,26 @@ export default function OrderManagement() {
         };
         fetchData();
     }, []);
+
+    const handleGetData = async () => {
+        try {
+            const response = await axios.get(
+                "https://localhost:7115/api/Order"
+            );
+            setOrders(response.data);
+        } catch (error) {
+            console.error("Error fetching order data:", error);
+        }
+    }
+
+    const handleChangeStatus = async(id: number, status: string) => {
+        const response = await axios.put(
+            `https://localhost:7115/api/Order/ChangeStatus/${id}?status=${status}`
+        );
+        if (response && response.status == 200) {
+           await handleGetData();
+        }
+    }
     return (
         <>
             <div className="relative h-35px">
@@ -26,7 +46,7 @@ export default function OrderManagement() {
                 <div className="">
                     <hr className="border-t border-neutral-600 w-full" />
                 </div>
-                <div className="grid grid-cols-7 text-customGrayLight text-center items-center w-full text-xs py-3">
+                <div className="grid grid-cols-8 text-customGrayLight text-center items-center w-full text-xs py-3">
                     <div className="grid col-span-1">
                         <div>Mã đơn hàng</div>
                     </div>
@@ -48,12 +68,15 @@ export default function OrderManagement() {
                     <div className="col-span-1">
                         <div>Trạng thái</div>
                     </div>
+                    <div className="col-span-1">
+                        <div>#</div>
+                    </div>
                 </div>
                 <div>
                     {orders.map((order, index) => (
                         <div
                             key={order.id}
-                            className={`grid grid-cols-7 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
+                            className={`grid grid-cols-8 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
                                 <div>{order.id}</div>
@@ -75,6 +98,13 @@ export default function OrderManagement() {
                             </div>
                             <div className="grid col-span-1">
                                 <div>{order.status}</div>
+                            </div>
+                            <div className="grid col-span-1">
+                                {order.status == "Đã Đặt Hàng" &&
+                                    <>
+                                        <button onClick={() => handleChangeStatus(order.id, 'Hủy Đơn')} className="bg-[#990000] text-white rounded-md">Hủy Đơn</button> | <button className="bg-customBlue text-white rounded-md" onClick={() => handleChangeStatus(order.id, 'Duyệt Đơn')}>Duyệt Đơn</button>
+                                    </>
+                                }
                             </div>
                         </div>
                     ))}

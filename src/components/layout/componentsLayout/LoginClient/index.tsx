@@ -12,15 +12,8 @@ export default function Login() {
         const response = await axios.post("https://localhost:7115/api/User/DangNhap", userLogin);
         if (response && response.status == 200) {
             let { data } = response;
-            if (data.role != "Khách hàng") {
-                localStorage.setItem("token-admin", data.token);
-                localStorage.setItem("role", data.role);
-                localStorage.setItem("fullName", data.fullName);
-                navigate("/admin");
-            }
-            else {
-                alert('Đăng Nhập Thất Bại')
-            }
+            localStorage.setItem("token", data.token);
+            navigate("/");
         }
         else {
             alert('Đăng Nhập Thất Bại')

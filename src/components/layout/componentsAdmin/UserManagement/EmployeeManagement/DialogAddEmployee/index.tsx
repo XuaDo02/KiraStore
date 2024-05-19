@@ -5,14 +5,13 @@ import { toast } from "react-toastify";
 
 const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => void; onUpdateEmployeeList: (newEmployee: EmployeeData) => void }) => {
   const [formData, setFormData] = useState({
-    UserId: "",
-    UserName: "",
-    DateOfBirth: "",
-    Gender: "",
-    Email: "",
-    Phone: "",
-    Address: "",
-    Position: "",
+    userName: "",
+    address: "",
+    gender: "",
+    email: "",
+    phone: "",
+    password: "",
+    role: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +26,7 @@ const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => v
     e.preventDefault();
     try {
       const response = await axios.post<EmployeeData>(
-        "https://6615003e2fc47b4cf27db117.mockapi.io/employee",
+        "https://localhost:7115/api/User",
         formData
       );
       onUpdateEmployeeList(response.data); // Cập nhật danh sách nhân viên trong EmployeeManagement
@@ -35,6 +34,7 @@ const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => v
       onClose(); // Đóng DialogAddEmployee sau khi thêm nhân viên thành công
     } catch (error) {
       console.error("Error adding employee:", error);
+      toast.error("Thêm nhân viên thất bại!")
     }
   };
 
@@ -53,38 +53,33 @@ const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => v
         <form onSubmit={handleSubmit}>
           <div className="mt-5">
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Mã nhân viên</label>
-              <input name="UserId" value={formData.UserId} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
-            </div>
-            <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Họ và tên</label>
-              <input name="UserName" value={formData.UserName} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
-            </div>
-            <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Ngày sinh</label>
-              <input name="DateOfBirth" value={formData.DateOfBirth} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
-            </div>
-            <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Giới tính</label>
-              <input name="Gender" value={formData.Gender} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
-            </div>
-            <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Email</label>
-              <input name="Email" value={formData.Email} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
-            </div>
-            <div className="mb-2 flex items-center text-zinc-400 text-sm">
-              <label className="block font-medium w-1/2 text-left px-5">Số điện thoại</label>
-              <input name="Phone" value={formData.Phone} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="userName" value={formData.userName} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Địa chỉ</label>
-              <input name="Address" value={formData.Address} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="address" value={formData.address} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+            </div>
+            <div className="mb-2 flex items-center text-zinc-400 text-sm">
+              <label className="block font-medium w-1/2 text-left px-5">Giới tính</label>
+              <input name="gender" value={formData.gender} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+            </div>
+            <div className="mb-2 flex items-center text-zinc-400 text-sm">
+              <label className="block font-medium w-1/2 text-left px-5">Email</label>
+              <input name="email" value={formData.email} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+            </div>
+            <div className="mb-2 flex items-center text-zinc-400 text-sm">
+              <label className="block font-medium w-1/2 text-left px-5">Số điện thoại</label>
+              <input name="phone" value={formData.phone} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+            </div>
+            <div className="mb-2 flex items-center text-zinc-400 text-sm">
+              <label className="block font-medium w-1/2 text-left px-5">Password</label>
+              <input name="password" value={formData.password} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Chức vụ</label>
-              <input name="Position" value={formData.Position} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="role" value={formData.role} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
-            
           </div>
 
           <div className="mt-5">

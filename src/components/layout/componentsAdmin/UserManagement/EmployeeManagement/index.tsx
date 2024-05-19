@@ -7,21 +7,37 @@ import DialogDeleteEmployee from "./DialogDelete";
 import { toast } from "react-toastify";
 
 const EmployeeManagement = () => {
-
   const [employees, setEmployees] = useState<EmployeeData[]>([]);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeData | null>(null);
+  const [showAddDialog, setShowAddDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deleteEmployee, setDeleteEmployee] = useState<EmployeeData | null>(null);
-  const [showAddDialog, setShowAddDialog] = useState(false);
+
+  //LIST EMPLOYEE START
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<EmployeeData[]>(
+          "https://localhost:7115/api/User/role/Nh%C3%A2n%20Vi%C3%AAn"
+        );
+        setEmployees(response.data);
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  //LIST EMPLOYEE END
 
   const handleAddClick = () => {
     setShowAddDialog(true); // Hiển thị DialogAddEmployee khi bấm vào nút "Thêm mới nhân viên"
-  }
+  };
+
   const handleAddEmployee = (newEmployee: EmployeeData) => {
     setEmployees([...employees, newEmployee]);
     setShowAddDialog(false);
-  }
+  };
 
   const handleEditClick = (employee: EmployeeData) => {
     setSelectedEmployee(employee);
@@ -32,17 +48,19 @@ const EmployeeManagement = () => {
   const handleDeleteClick = (employee: EmployeeData) => {
     setDeleteEmployee(employee);
     setShowDeleteDialog(true);
-  }
+  };
+
   const handleDeleteEmployee = async () => {
     if (deleteEmployee) {
       try {
-        await axios.delete(`https://6615003e2fc47b4cf27db117.mockapi.io/employee/${deleteEmployee.id}`);
+        await axios.delete(`https://localhost:7115/api/User/${deleteEmployee.id}`);
         const updatedEmployees = employees.filter(emp => emp.id !== deleteEmployee.id);
         setEmployees(updatedEmployees);
         setShowDeleteDialog(false);
-        toast.success("Xoá thành công!")
+        toast.success("Xoá thành công!");
       } catch (error) {
         console.error("Error deleting employee:", error);
+        // toast.error("Có lỗi xảy ra khi xoá nhân viên!");
       }
     }
   };
@@ -53,7 +71,7 @@ const EmployeeManagement = () => {
     try {
       // Cập nhật thông tin nhân viên trên API
       await updateEmployeeOnAPI(updatedEmployee);
-  
+
       // Tìm kiếm và cập nhật nhân viên trong mảng employees
       const updatedEmployees = employees.map(emp => {
         if (emp.id === updatedEmployee.id) {
@@ -68,32 +86,17 @@ const EmployeeManagement = () => {
       toast.error("Cập nhật thông tin nhân viên thất bại!");
     }
   };
+
   // Hàm gửi yêu cầu cập nhật thông tin nhân viên lên API
   const updateEmployeeOnAPI = async (updatedEmployee: EmployeeData) => {
     try {
-      await axios.put(`https://6615003e2fc47b4cf27db117.mockapi.io/employee/${updatedEmployee.id}`, updatedEmployee);
+      await axios.put(`https://localhost:7115/api/User/${updatedEmployee.id}`, updatedEmployee);
     } catch (error) {
       console.error("Error updating employee:", error);
       toast.error("Cập nhật thông tin nhân viên thất bại!");
     }
   };
   // HÀM UPDATE API END
-
-  //LIST EMPLOYEE START
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<EmployeeData[]>(
-          "https://6615003e2fc47b4cf27db117.mockapi.io/employee"
-        );
-        setEmployees(response.data);
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-  //LIST EMPLOYEE END
 
   return (
     <>
@@ -113,14 +116,14 @@ const EmployeeManagement = () => {
           <div className="grid col-span-5 grid-cols-7">
             <div className="col-span-2">Mã nhân viên</div>
             <div className="col-span-2">Họ và tên</div>
-            <div className="col-span-2">Ngày sinh</div>
+            <div className="col-span-2">Địa chỉ</div>
             <div className="col-span-1">Giới tính</div>
           </div>
           <div className="grid col-span-5 grid-cols-6">
             <div className="col-span-2">Email</div>
-            <div className="col-span-1">Số điện thoại</div>
-            <div className="col-span-2">Địa chỉ</div>
+            <div className="col-span-2">Số điện thoại</div>
             <div className="col-span-1">Chức vụ</div>
+            <div className="col-span-1">Mật khẩu</div>
           </div>
           <div className="grid col-span-2 ">
             <div className="col-span-1">Hành động</div>
@@ -134,15 +137,15 @@ const EmployeeManagement = () => {
             >
               <div className="grid col-span-5 grid-cols-7">
                 <div className="col-span-2">{employee.id}</div>
-                <div className="col-span-2">{employee.UserName}</div>
-                <div className="col-span-2">{new Date(employee.DateOfBirth).toLocaleDateString()}</div>
-                <div className="col-span-1">{employee.Gender}</div>
+                <div className="col-span-2">{employee.userName}</div>
+                <div className="col-span-2">{employee.address}</div>
+                <div className="col-span-1">{employee.gender}</div>
               </div>
               <div className="grid col-span-5 grid-cols-6">
-                <div className="col-span-2">{employee.Email}</div>
-                <div className="col-span-1">{employee.Phone}</div>
-                <div className="col-span-2">{employee.Address}</div>
-                <div className="col-span-1">{employee.Position}</div>
+                <div className="col-span-2">{employee.email}</div>
+                <div className="col-span-2">{employee.phone}</div>
+                <div className="col-span-1">{employee.role}</div>
+                <div className="col-span-1">{employee.password}</div>
               </div>
               <div className="grid col-span-2 grid-cols-2">
                 <button className="col-span-1 flex items-center justify-center" onClick={() => handleEditClick(employee)}>
@@ -160,7 +163,6 @@ const EmployeeManagement = () => {
         {showAddDialog && <DialogAddEmployee onClose={() => setShowAddDialog(false)} onUpdateEmployeeList={handleAddEmployee} />}
         {showDeleteDialog && <DialogDeleteEmployee handleClose={() => setShowDeleteDialog(false)} onDeleteEmployee={handleDeleteEmployee} employee={deleteEmployee} />}
       </div>
-
     </>
   );
 };

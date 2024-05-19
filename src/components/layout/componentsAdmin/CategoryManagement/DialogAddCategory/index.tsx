@@ -5,10 +5,10 @@ import { CategoriesData } from "../../../../../types/categoriesData";
 
 const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => void; onUpdateCategoryList: (newCategory: CategoriesData) => void }) => {
   const [formData, setFormData] = useState({
-    id: 0, // Định dạng id là số nguyên
-    categoryName: "", // Định dạng categoryName là chuỗi
-    categoryDescription: "", // Định dạng categoryDescription là chuỗi
-    dateCreated: new Date().toISOString() // Sử dụng định dạng ngày tháng ISO 8601
+    id: 0,
+    categoryName: "",
+    categoryDescription: "",
+    dateCreated: new Date().toISOString()
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
       ...prevState,
       [name]: value,
     }));
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,13 +26,14 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
         "https://localhost:7115/api/Category",
         formData
       );
-      onUpdateCategoryList(response.data); // Cập nhật danh sách loại sp trong CategoryManagement
-      toast.success("Thêm loại sp mới thành công!");
-      onClose(); // Đóng DialogAddCategory sau khi thêm loại thành công
+      onUpdateCategoryList(response.data); // Cập nhật danh sách loại sản phẩm
+      toast.success("Thêm loại sản phẩm mới thành công!");
+      onClose(); // Đóng DialogAddCategory sau khi thêm thành công
     } catch (error) {
       console.error("Error adding category:", error);
     }
   };
+
   const handleClose = () => {
     onClose(); // Đóng DialogAddCategory khi nhấn nút "Huỷ" hoặc "Đóng"
   };
@@ -49,7 +50,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
           <div className="mt-5">
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Mã loại</label>
-              <input name="id" value={formData.id} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="id" type="number" value={formData.id} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Tên loại</label>
@@ -61,7 +62,7 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
             </div>
             <div className="mb-2 flex items-center text-zinc-400 text-sm">
               <label className="block font-medium w-1/2 text-left px-5">Ngày tạo</label>
-              <input name="dateCreated" value={formData.dateCreated} onChange={handleChange} className="bg-customDark3 py-1 flex justify-end w-full px-5 text-right" />
+              <input name="dateCreated" type="datetime-local" value={formData.dateCreated} onChange={handleChange} className="w-full px-3 py-2 border rounded" required />
             </div>
           </div>
           <div className="mt-5">
@@ -83,5 +84,4 @@ const DialogAddCategory = ({ onClose, onUpdateCategoryList }: { onClose: () => v
 };
 
 export default DialogAddCategory;
-
 
