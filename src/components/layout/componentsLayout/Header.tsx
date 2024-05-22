@@ -1,33 +1,33 @@
 import { useState } from "react";
-import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
-import DropdownCatalog from "./DropdownCatalog";
 import axios from "axios";
-import { ProductData } from "../../../types/productData";
+import DropdownCatalog from "./DropdownCatalog";
+import Marquee from "react-fast-marquee";
 
 export default function Header() {
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState<ProductData[]>([]);
+    
     const handleSearch = async () => {
         try {
+            // Gửi yêu cầu tìm kiếm
             const response = await axios.get(`https://localhost:7115/api/Product/search?productName=${searchTerm}`);
-            setSearchResults(response.data);
+            const searchResults = response.data;
+            // Chuyển hướng đến trang tìm kiếm với kết quả
+            window.location.href = `/searchResults?searchTerm=${encodeURIComponent(searchTerm)}`;
+            setSearchTerm("");
         } catch (error) {
             console.error("Error searching for products:", error);
-            setSearchResults([]);
         }
+        
     };
 
     return (
         <>
             <div className="h-14 grid grid-cols-12 bg-customOrange">
-                {/* Phần 1: Tên thương hiệu */}
                 <div className="flex text-black col-span-2">
-                    <img src="/imgHeader/SK1.png" className="w-16 h-16" />
+                    <img src="/imgHeader/SK1.png" className="w-16 h-16" alt="Logo" />
                     <h1 className="pt-2.5 text-3xl">Kira Store</h1>
                 </div>
-
-                {/* Phần 2: Tin mới */}
                 <div className="col-span-3 flex items-center justify-start relative">
                     <button className="relative z-10 w-40 text-sm bg-gradient-to-r from-customBrown to-customOrange rounded-lg hover:from-transparent hover:to-customBrown">
                         Tin mới
@@ -40,7 +40,6 @@ export default function Header() {
                     </div>
                 </div>
 
-                {/* Phần 3: "Thông tin" */}
                 <div className="flex col-span-4 ml-10">
                     <div className="grid grid-cols-5 items-center ">
                         <div className="col-span-1">
@@ -54,8 +53,6 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-
-                {/* Phần 4: Ô nhập liệu tìm kiếm */}
                 <div className="flex col-span-3 items-center">
                     <div className="grid grid-cols-6 ">
                         <div className="col-span-3 px-4">
@@ -86,22 +83,8 @@ export default function Header() {
                                 </button>
                             </Link>
                         </div>
-
                     </div>
                 </div>
-
-                {/* Hiển thị kết quả tìm kiếm (nếu có) */}
-                {Array.isArray(searchResults) && searchResults.length > 0 && (
-                    <div className="col-span-12">
-                        <h2>Kết quả tìm kiếm:</h2>
-                        <ul>
-                            {searchResults.map((product) => (
-                                <li key={product.id}>{product.productName}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
             </div>
         </>
     );

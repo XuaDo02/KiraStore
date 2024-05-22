@@ -14,6 +14,7 @@ import ProductDetail from "../components/layout/componentsLayout/ProductDetail";
 import Dashboard from "../components/layout/componentsAdmin/Dashboard";
 import BlogPage from "../components/layout/componentsLayout/BlogPage";
 import Catalogs from "../components/layout/componentsLayout/Catalogs";
+import SearchResultsPage from "../components/layout/componentsLayout/SearchResultsPage";
 
 
 export const routes: IRoute[] = [
@@ -91,5 +92,11 @@ export const routes: IRoute[] = [
         path: PATH_BLOGPAGE,
         element:<BlogPage/>,
         isAdmin: false,
+    },
+    {
+        path: "/searchResults",
+        element: <SearchResultsPage />,
+        isAdmin: false,
     }
+    
 ]
