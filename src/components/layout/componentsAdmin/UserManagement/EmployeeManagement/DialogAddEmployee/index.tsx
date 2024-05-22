@@ -14,7 +14,7 @@ const DialogAddEmployee = ({ onClose, onUpdateEmployeeList }: { onClose: () => v
     role: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,

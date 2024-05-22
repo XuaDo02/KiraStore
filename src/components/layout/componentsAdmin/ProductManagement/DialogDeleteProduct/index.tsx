@@ -14,9 +14,9 @@ const DialogDeleteProduct: React.FC<DialogDeleteProductProps> = ({ handleClose, 
             console.error("Error deleting product:", error);
         }
     };
-    // Kiểm tra xem employee có null hay không trước khi sử dụng
+    
     if (!product) {
-        return null; // hoặc có thể trả về một phần tử JSX khác để hiển thị khi employee là null
+        return null;
     }
     return (
         <>

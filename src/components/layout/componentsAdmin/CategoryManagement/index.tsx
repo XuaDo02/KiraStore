@@ -8,7 +8,7 @@ import DialogEditCategory from "./DialogEditCategory";
 
 const CategoryManagement = () => {
     const [categories, setCategories] = useState<CategoriesData[]>([]);
-    const [showAddDialog, setShowAddDialog] = useState(false)
+    const [showAddDialog, setShowAddDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<CategoriesData | null>(null);
     const [deleteCategory, setDeleteCategory] = useState<CategoriesData | null>(null);
@@ -16,27 +16,28 @@ const CategoryManagement = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const response = await axios.get<CategoriesData[]>(
-              "https://localhost:7115/api/Category"
-            );
-            setCategories(response.data);
-          } catch (error) {
-            console.error("Error fetching categories data:", error);
-          }
+            try {
+                const response = await axios.get<CategoriesData[]>(
+                    "https://localhost:7115/api/Category"
+                );
+                setCategories(response.data);
+            } catch (error) {
+                console.error("Error fetching categories data:", error);
+            }
         };
-    
-        fetchData();
-      }, []);
 
-      const handleAddClick = () => {
+        fetchData();
+    }, []);
+
+    const handleAddClick = () => {
         setShowAddDialog(true);
-      };
-    
-      const handleAddCategory = (newCategory: CategoriesData) => {
+    };
+
+    const handleAddCategory = (newCategory: CategoriesData) => {
+        console.log('Adding new category:', newCategory);
         setCategories(prevCategories => [...prevCategories, newCategory]);
         setShowAddDialog(false);
-      };
+    };
 
     const handleEditClick = (category: CategoriesData) => {
         setSelectedCategory(category);
@@ -70,7 +71,7 @@ const CategoryManagement = () => {
         }
     };
 
-    const handleDeleteClick = (category : CategoriesData) => {
+    const handleDeleteClick = (category: CategoriesData) => {
         setDeleteCategory(category);
         setShowDeleteDialog(true);
     };
@@ -127,7 +128,7 @@ const CategoryManagement = () => {
                 <div className="relative h-[calc(100vh - 240px)] overflow-y-auto">
                     {categories.map((category, index) => (
                         <div
-                            key={category.id} // Thêm key ở đây
+                            key={category.id}
                             className={`grid grid-cols-5 text-white text-center items-center w-full text-xs py-2 ${index % 2 === 0 ? `bg-customDark3` : `bg-customDark2`}`}
                         >
                             <div className="grid col-span-1">
@@ -144,15 +145,14 @@ const CategoryManagement = () => {
                             </div>
                             <div className="grid col-span-1 grid-cols-4">
                                 <div className="col-span-1"></div>
-                                <button 
-                                onClick={() => handleEditClick(category)}
-                                className="col-span-1 flex items-center justify-center">
+                                <button
+                                    onClick={() => handleEditClick(category)}
+                                    className="col-span-1 flex items-center justify-center">
                                     <img src="/imgEmployee/Edit.png" className="w-5 h-5 mr-1" alt="Edit" /> Sửa
                                 </button>
-                                {/* Delete button */}
                                 <button
-                                onClick={() => handleDeleteClick(category)}
-                                className="col-span-1 flex items-center justify-center">
+                                    onClick={() => handleDeleteClick(category)}
+                                    className="col-span-1 flex items-center justify-center">
                                     <img src="/imgCategory/remove.png" className="w-5 h-5 mr-1" alt="Delete" /> Xoá
                                 </button>
                                 <div className="col-span-1"></div>

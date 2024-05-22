@@ -5,6 +5,8 @@ export interface ProductData {
     productPrice: number;
     productQuantity: number;
     productDescription: string;
-    supplierId: string;
-    categoryId: string;
+    categoryId: number;
+    categoryName: string;
+    supplierId: number;
+    supplierName: string;
 }
